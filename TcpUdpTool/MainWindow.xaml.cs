@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TcpUdpTool.Utils;
 
 namespace TcpUdpTool
 {
@@ -152,6 +153,7 @@ namespace TcpUdpTool
                 }
                 if (rec != 0)
                 {
+                    MessageBox.Show(HexUtils.ByteToHexStr(recieve));
                     RichtxtboxInput(Encoding.UTF8.GetString(recieve, 0, rec), RBoxRec);
                     break;
                 }
