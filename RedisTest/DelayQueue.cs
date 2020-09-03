@@ -33,7 +33,6 @@ namespace RedisTest
 
         ConnectionMultiplexer _Redis = null;
         IDatabase _DefaultDb = null;
-        ISubscriber _Sub = null;
         Timer _RemoveKeyTimer = null;
 
         /// <summary>
@@ -53,6 +52,7 @@ namespace RedisTest
             {
                 _RemoveKeyTimer = new Timer(1000);
                 _RemoveKeyTimer.Elapsed += _RemoveKeyTimer_Elapsed;
+                _RemoveKeyTimer.Start();
                 _Redis = ConnectionMultiplexer.Connect(conn);
                 _DefaultDb = _Redis.GetDatabase(0);
             }
@@ -71,13 +71,13 @@ namespace RedisTest
             //sp.TotalSeconds()
 
             var tick = DateTime.Now.Ticks;
-            var needRemove = _unitkeysDict.Where(r => new TimeSpan(tick - r.Value).TotalSeconds > UnitTime);
+            var needRemove = _unitkeysDict.Where(r => new TimeSpan(tick - r.Value).TotalSeconds >= UnitTime);
             if (needRemove != null || needRemove.Count() == 0)
             {
-                var keys = needRemove.Select(r => r.Key);
-                foreach (var key in keys)
+                var keys = needRemove.Select(r => r.Key).ToArray();
+                for (int i = 0; i < keys.Count(); i++)
                 {
-                    _unitkeysDict.Remove(key);
+                    _unitkeysDict.Remove(keys[i]);
                 }
             }
         }
@@ -94,7 +94,9 @@ namespace RedisTest
             if (!_unitkeysDict.Keys.Any(k => k.Equals(msg.Key)))
             {
                 var dt = DateTime.Now;
-                _DefaultDb.SortedSetAdd(QueueName, msg.Content, dt.AddSeconds(DelayTime).Ticks , CommandFlags.None);
+                var dt2 = dt.AddSeconds(DelayTime);
+                Console.WriteLine($"push tick:{dt2.Ticks}");
+                _DefaultDb.SortedSetAdd(QueueName, msg.Content, dt2.Ticks , CommandFlags.None);
                 _unitkeysDict.Add(msg.Key, dt.Ticks);
                 return 0;
             }
@@ -108,8 +110,12 @@ namespace RedisTest
         public List<QueueMessage> Pop()
         {
             List<QueueMessage> rt = new List<QueueMessage>();
-            var values = _DefaultDb.SortedSetRangeByScore(QueueName, DateTime.Now.Ticks, double.MaxValue);
-            if(values != null && values.Count() > 0)
+            var tick = DateTime.Now.Ticks;
+            Console.WriteLine($" pop tick:{tick}");
+            //感觉没删除key,调用SortedSetRemoveRangeByScore删除
+            var values = _DefaultDb.SortedSetRangeByScore(QueueName, double.MinValue, tick, Exclude.Both,Order.Descending);
+            _DefaultDb.SortedSetRemoveRangeByScore(QueueName, double.MinValue, tick, Exclude.Both);
+            if (values != null && values.Count() > 0)
             {
                 foreach (var v in values)
                 {
