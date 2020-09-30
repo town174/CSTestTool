@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -27,7 +28,8 @@ namespace ServiceWather
         /// <summary>
         /// 要守护的服务名
         /// </summary>
-        private static readonly string toWatchServiceName = ConfigurationManager.AppSettings["toWatchServiceName"];
+        private static readonly string _toWatchServiceName = ConfigurationManager.AppSettings["toWatchServiceName"];
+        private static readonly string _checkUrl = ConfigurationManager.AppSettings["checkurl"];
         private System.Timers.Timer _timer;
 
         protected override void OnStart(string[] args)
@@ -44,9 +46,9 @@ namespace ServiceWather
         void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             //如果服务状态为停止，则重新启动服务
-            if (!CheckSericeStart(toWatchServiceName))
+            if (!CheckSericeStart(_toWatchServiceName))
             {
-                StartService(toWatchServiceName);
+                StartService(_toWatchServiceName);
             }
         }
 
@@ -98,6 +100,17 @@ namespace ServiceWather
                     {
                         if ((service.Status == ServiceControllerStatus.Stopped)
                             || (service.Status == ServiceControllerStatus.StopPending))
+                        {
+                            result = false;
+                        }
+                    }
+                    if (ServiceName.Trim().Equals("Ssit.SmartBookShelf"))
+                    {
+                        RestClient client = new RestClient(_checkUrl);
+                        IRestRequest request = new RestRequest(Method.GET);
+                        request.Timeout = _timerInterval / 2;
+                        var respone = client.Get(request);//Get()(request);
+                        if (respone.StatusCode != System.Net.HttpStatusCode.OK)
                         {
                             result = false;
                         }
