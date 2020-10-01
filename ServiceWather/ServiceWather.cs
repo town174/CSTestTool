@@ -76,6 +76,10 @@ namespace ServiceWather
                 {
                     if (service.ServiceName.Trim() == serviceName.Trim())
                     {
+                        if(service.Status == ServiceControllerStatus.Running)
+                        {
+                            service.Stop();
+                        }
                         service.Start();
                         //直到服务启动
                         service.WaitForStatus(ServiceControllerStatus.Running, new TimeSpan(0, 0, 30));
@@ -102,17 +106,19 @@ namespace ServiceWather
                             || (service.Status == ServiceControllerStatus.StopPending))
                         {
                             result = false;
+                            return result;
                         }
                     }
-                    if (ServiceName.Trim().Equals("Ssit.SmartBookShelf"))
+                    if (serviceName.Trim().Equals("Ssit.SmartBookShelf"))
                     {
                         RestClient client = new RestClient(_checkUrl);
                         IRestRequest request = new RestRequest(Method.GET);
-                        request.Timeout = _timerInterval / 2;
+                        request.Timeout = _timerInterval / 4;
                         var respone = client.Get(request);//Get()(request);
                         if (respone.StatusCode != System.Net.HttpStatusCode.OK)
                         {
                             result = false;
+                            return result;
                         }
                     }
                 }
