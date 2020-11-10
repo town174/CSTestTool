@@ -5,7 +5,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceWather
+namespace ServiceWatcher
 {
     static class Program
     {
@@ -17,9 +17,12 @@ namespace ServiceWather
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new ServiceWather()
+                new ServiceWatcher()
             };
             ServiceBase.Run(ServicesToRun);
+
+            //ServiceWatcher s1 = new ServiceWatcher();
+            //s1.OnStart();
         }
     }
 }

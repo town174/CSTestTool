@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E5539DA8-6FD6-4DFF-9C10-0292A913CB8C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ServiceWather</RootNamespace>
-    <AssemblyName>ServiceWather</AssemblyName>
+    <RootNamespace>ServiceWatcher</RootNamespace>
+    <AssemblyName>ServiceWatcher</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -51,15 +51,17 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceWather.cs">
+    <Compile Include="ServiceWatcher.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ServiceWather.Designer.cs">
-      <DependentUpon>ServiceWather.cs</DependentUpon>
+    <Compile Include="ServiceWatcher.Designer.cs">
+      <DependentUpon>ServiceWatcher.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

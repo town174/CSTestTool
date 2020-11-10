@@ -1,6 +1,6 @@
-﻿namespace ServiceWather
+﻿namespace ServiceWatcher
 {
-    partial class ServiceWather
+    partial class ServiceWatcher
     {
         /// <summary> 
         /// 必需的设计器变量。

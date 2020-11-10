@@ -10,17 +10,20 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceWather
+namespace ServiceWatcher
 {
-    partial class ServiceWather : ServiceBase
+    partial class ServiceWatcher : ServiceBase
     {
         private static string currentExePath = string.Empty;
-        public ServiceWather()
+        public ServiceWatcher()
         {
             InitializeComponent();
             currentExePath = AppDomain.CurrentDomain.BaseDirectory;
         }
-
+        /// <summary>
+        /// 服务运行方式
+        /// </summary>
+        private static readonly int _runModel = Convert.ToInt32(ConfigurationManager.AppSettings["runModel"]);
         /// <summary>
         /// 检查间隔
         /// </summary>
@@ -28,7 +31,14 @@ namespace ServiceWather
         /// <summary>
         /// 要守护的服务名
         /// </summary>
+        private static readonly string _fullName = ConfigurationManager.AppSettings["fullName"];
+        /// <summary>
+        /// 要守护的服务名
+        /// </summary>
         private static readonly string _toWatchServiceName = ConfigurationManager.AppSettings["toWatchServiceName"];
+        /// <summary>
+        /// 检查连接
+        /// </summary>
         private static readonly string _checkUrl = ConfigurationManager.AppSettings["checkurl"];
         private System.Timers.Timer _timer;
 
@@ -45,10 +55,21 @@ namespace ServiceWather
 
         void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            //如果服务状态为停止，则重新启动服务
-            if (!CheckSericeStart(_toWatchServiceName))
+            if(_runModel == 1)
             {
-                StartService(_toWatchServiceName);
+                //如果服务状态为停止，则重新启动服务
+                if (!CheckSericeStart(_toWatchServiceName))
+                {
+                    StartService(_toWatchServiceName);
+                }
+            }
+            else if (_runModel == 2)
+            {
+                //如果进程状态为停止或不存在，则重新启动进程
+                if (!CheckProcessStart(_toWatchServiceName))
+                {
+                    StartProcess(_toWatchServiceName,_fullName);
+                }
             }
         }
 
@@ -63,6 +84,93 @@ namespace ServiceWather
             }
         }
 
+        private bool CheckProcessStart(string processName)
+        {
+            bool result = true;
+            try
+            {
+                var processes = Process.GetProcesses(); //ServiceController.GetServices();
+                if (!processes.Any(r => r.ProcessName.Equals(processName))) return false;
+                else
+                {
+                    RestClient client = new RestClient(_checkUrl);
+                    IRestRequest request = new RestRequest(Method.GET);
+                    request.Timeout = _timerInterval / 4;
+                    var respone = client.Get(request);//Get()(request);
+                    if (respone.StatusCode != System.Net.HttpStatusCode.OK)
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+        private bool StartProcess(string processName,string processFullName)
+        {
+            StopProcess(processName);
+            Process.Start(processFullName);
+            return true;
+        }
+        private bool StopProcess(string processName)
+        {
+            var processes = Process.GetProcessesByName(processName);
+            if(processes != null && processes.Count() > 0)
+            {
+                int c = processes.Count();
+                for (int i = 0; i < c; i++)
+                {
+                    processes[i].Kill();
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 检查服务是否启动
+        /// </summary>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
+        private bool CheckSericeStart(string serviceName)
+        {
+            bool result = true;
+            try
+            {
+                ServiceController[] services = ServiceController.GetServices();
+                foreach (ServiceController service in services)
+                {
+                    if (service.ServiceName.Trim() == serviceName.Trim())
+                    {
+                        if ((service.Status == ServiceControllerStatus.Stopped)
+                            || (service.Status == ServiceControllerStatus.StopPending))
+                        {
+                            result = false;
+                            return result;
+                        }
+                    }
+                    if (serviceName.Trim().Equals(_toWatchServiceName))
+                    {
+                        RestClient client = new RestClient(_checkUrl);
+                        IRestRequest request = new RestRequest(Method.GET);
+                        request.Timeout = _timerInterval / 4;
+                        var respone = client.Get(request);//Get()(request);
+                        if (respone.StatusCode != System.Net.HttpStatusCode.OK)
+                        {
+                            result = false;
+                            return result;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //LogHelper.WriteLog(currentExePath, ex);
+            }
+            return result;
+        }
         /// <summary>
         /// 启动服务
         /// </summary>
@@ -91,43 +199,6 @@ namespace ServiceWather
             {
                 //LogHelper.WriteLog(currentExePath, ex);
             }
-        }
-        private bool CheckSericeStart(string serviceName)
-        {
-            bool result = true;
-            try
-            {
-                ServiceController[] services = ServiceController.GetServices();
-                foreach (ServiceController service in services)
-                {
-                    if (service.ServiceName.Trim() == serviceName.Trim())
-                    {
-                        if ((service.Status == ServiceControllerStatus.Stopped)
-                            || (service.Status == ServiceControllerStatus.StopPending))
-                        {
-                            result = false;
-                            return result;
-                        }
-                    }
-                    if (serviceName.Trim().Equals("Ssit.SmartBookShelf"))
-                    {
-                        RestClient client = new RestClient(_checkUrl);
-                        IRestRequest request = new RestRequest(Method.GET);
-                        request.Timeout = _timerInterval / 4;
-                        var respone = client.Get(request);//Get()(request);
-                        if (respone.StatusCode != System.Net.HttpStatusCode.OK)
-                        {
-                            result = false;
-                            return result;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                //LogHelper.WriteLog(currentExePath, ex);
-            }
-            return result;
         }
         /// <summary>
         /// 停止
