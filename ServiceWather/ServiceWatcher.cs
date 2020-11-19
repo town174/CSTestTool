@@ -171,6 +171,7 @@ namespace ServiceWatcher
             }
             return result;
         }
+        
         /// <summary>
         /// 启动服务
         /// </summary>
@@ -200,6 +201,7 @@ namespace ServiceWatcher
                 //LogHelper.WriteLog(currentExePath, ex);
             }
         }
+        
         /// <summary>
         /// 停止
         /// </summary>
