@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketTool", "SocketTool\So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParseHtmlTest", "ParseHtmlTest\ParseHtmlTest.csproj", "{21D653BD-F35C-483B-A6BF-5907A6434145}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BroswerTest", "BroswerTest\BroswerTest.csproj", "{4A21325C-E12C-464C-986C-D0D8C63F1BDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicTest", "PicTest\PicTest.csproj", "{2AA152C8-B1F9-4C94-AA09-A2FB306E3318}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,12 @@ Global
 		{21D653BD-F35C-483B-A6BF-5907A6434145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21D653BD-F35C-483B-A6BF-5907A6434145}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21D653BD-F35C-483B-A6BF-5907A6434145}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A21325C-E12C-464C-986C-D0D8C63F1BDC}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{4A21325C-E12C-464C-986C-D0D8C63F1BDC}.Release|Any CPU.ActiveCfg = Release|x64
+		{2AA152C8-B1F9-4C94-AA09-A2FB306E3318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AA152C8-B1F9-4C94-AA09-A2FB306E3318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AA152C8-B1F9-4C94-AA09-A2FB306E3318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AA152C8-B1F9-4C94-AA09-A2FB306E3318}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
