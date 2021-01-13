@@ -18,6 +18,7 @@ namespace PicTest
         {
             InitializeComponent();
             InitCb();
+            InitLv();
             this.pbZoom.MouseDown += pbZoom_MouseDown;
         }
 
@@ -37,6 +38,7 @@ namespace PicTest
         }
 
         Dictionary<string, string> _ExistPointDicts = new Dictionary<string, string>();
+        List<AddPointEventArgs> es = new List<AddPointEventArgs>();
         private void AddPointEvenHandle(object sender, AddPointEventArgs e)
         {
             if(_ExistPointDicts.Keys.Any(r => r.Equals(e.PointName)))
@@ -44,15 +46,15 @@ namespace PicTest
                 MessageBox.Show("存在同名点位, 重新编辑");
                 return;
             }
+            es.Add(e);
             this.lvPoints.Invoke(new MethodInvoker(() => {
-                //this.lvPoints
+                this.lvPoints.BeginUpdate();
+                List<string> contents = new List<string>() {
+                    e.PointName,e.PointX,e.PointY
+                };
+                this.lvPoints.Items.Add(new ListViewItem(contents.ToArray()));
+                this.lvPoints.EndUpdate();
             }));
-        }
-
-        ObservableCollection<string> observers = new ObservableCollection<string>();
-        private void InitLv()
-        {
-            //this.lvPoints.DataBindings = observers;
         }
 
         private void btnBg_Click(object sender, EventArgs e)
@@ -135,11 +137,32 @@ namespace PicTest
             cbZoom.DisplayMember = "Value";
         }
 
+        private void InitLv()
+        {
+            //设置detail视图
+            lvPoints.View = View.Details;
+            lvPoints.FullRowSelect = true;
+            lvPoints.GridLines = true;
+            //创建表头
+            Dictionary<string, int> chDicts = new Dictionary<string, int>() {
+                ["点位名称"] = 150,
+                ["点位坐标x"] = 80,
+                ["点位坐标y"] = 80
+            };
+            foreach (var kv in chDicts)
+            {
+                ColumnHeader ch = new ColumnHeader();
+                ch.Text = kv.Key;
+                ch.Width = kv.Value;
+                ch.TextAlign = HorizontalAlignment.Left;
+                lvPoints.Columns.Add(ch);
+            }
+        }
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(normalImage == null)
             {
-                //MessageBox.Show("请选中一张图片");
                 return;
             }
             var proportion = float.Parse(cbZoom.SelectedValue.ToString());
@@ -153,6 +176,12 @@ namespace PicTest
             if (mouse.Y < ctPoint.Y) return false;
             if (mouse.Y > ctPoint.Y + ctSize.Height) return false;
             return true;
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            var dt = NPOIHelper.ListToDataTable(es);
+            NPOIHelper.Export(dt, "", "export.xls");
         }
     }
 }

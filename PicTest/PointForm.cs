@@ -29,6 +29,7 @@ namespace PicTest
         public PointForm(int x, int y)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
             tbPointX.Text = x.ToString();
             tbPointY.Text = y.ToString();
         }
