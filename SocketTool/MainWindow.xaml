@@ -5,36 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SocketTool"
         mc:Ignorable="d"
-        Title="Tcp客户端测试小工具，用于公司interLib测试" Height="600
+        Title="Tcp客户端测试小工具，用于LibSystem测试" Height="600
         " Width="866.568" FontSize="18">
-    <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="44,21,0,0" TextWrapping="Wrap" Text="Ip:" VerticalAlignment="Top" Height="28" Width="63" FontSize="18"/>
-        <TextBox x:Name="BoxIP"  HorizontalAlignment="Left" Height="23" Margin="107,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="18"/>
-        <TextBlock HorizontalAlignment="Left" Margin="298,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="63" FontSize="18"><Run Text="Port"/><Run Text=":"/></TextBlock>
-        <TextBox x:Name="BoxPort" HorizontalAlignment="Left" Height="23" Margin="361,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="18"/>
-        <Button x:Name="CreateBtn" Content="创建" HorizontalAlignment="Left" Margin="544,19,0,0" VerticalAlignment="Top" Width="75" FontSize="18" Click="CreateBtn_Click"/>
-        <Button x:Name="LinkBtn" Content="连接" HorizontalAlignment="Left" Margin="652,19,0,0" VerticalAlignment="Top" Width="75" FontSize="18" RenderTransformOrigin="1.889,0.712" Click="LinkBtn_Click"/>
-        <GroupBox x:Name="GBox1" Header="数据发送窗口" HorizontalAlignment="Left" Height="231" Margin="44,102,0,0" VerticalAlignment="Top" Width="683" FontSize="18">
-            <RichTextBox x:Name="RBoxSend" HorizontalAlignment="Left" Height="146" Margin="10,25,0,0" VerticalAlignment="Top" Width="637">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run Text=""/>
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
-        </GroupBox>
-        <CheckBox x:Name="CBoxEnter" Content="发送内容加入回车
-                  " HorizontalAlignment="Left" Margin="49,65,0,0" VerticalAlignment="Top" FontSize="18" Width="178"/>
-        <GroupBox x:Name="GBox2" Header="数据接收窗口" HorizontalAlignment="Left" Height="231" Margin="49,328,0,0" VerticalAlignment="Top" Width="683" FontSize="18">
-            <RichTextBox x:Name="RBoxRec" HorizontalAlignment="Left" Height="146" Margin="10,25,0,0" VerticalAlignment="Top" Width="637">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run Text=""/>
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
-        </GroupBox>
-        <Button x:Name="SendBtn" Content="发送" HorizontalAlignment="Left" Margin="544,60,0,0" VerticalAlignment="Top" Width="75" FontSize="18" Click="SendBtn_Click"/>
-        <ComboBox x:Name="EncodingCbx" DisplayMemberPath="Name" SelectedValuePath="Name" HorizontalAlignment="Left" Margin="299,61,0,0" VerticalAlignment="Top" Width="120"/>
+    <Grid Visibility="Visible">
+        <TabControl HorizontalAlignment="Left" Height="580"  Margin="0,0,0,0" VerticalAlignment="Top" Width="866">
+            <TabItem Header="Send">
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock HorizontalAlignment="Left" Margin="44,21,0,0" TextWrapping="Wrap" Text="Ip:" VerticalAlignment="Top" Height="28" Width="63" FontSize="18"/>
+                    <TextBox x:Name="BoxIP"  HorizontalAlignment="Left" Height="23" Margin="107,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="18"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="298,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="63" FontSize="18"><Run Text="Port"/><Run Text=":"/></TextBlock>
+                    <TextBox x:Name="BoxPort" HorizontalAlignment="Left" Height="23" Margin="361,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="18"/>
+                    <Button x:Name="CreateBtn" Content="创建" HorizontalAlignment="Left" Margin="544,19,0,0" VerticalAlignment="Top" Width="75" FontSize="18" Click="CreateBtn_Click"/>
+                    <Button x:Name="LinkBtn" Content="连接" HorizontalAlignment="Left" Margin="652,19,0,0" VerticalAlignment="Top" Width="75" FontSize="18" RenderTransformOrigin="1.889,0.712" Click="LinkBtn_Click"/>
+                    <GroupBox x:Name="GBox1" Header="数据发送窗口" HorizontalAlignment="Left" Height="231" Margin="44,102,0,0" VerticalAlignment="Top" Width="683" FontSize="18">
+                        <RichTextBox x:Name="RBoxSend" HorizontalAlignment="Left" Height="146" Margin="10,25,0,0" VerticalAlignment="Top" Width="637">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text=""/>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </GroupBox>
+                    <CheckBox x:Name="CBoxEnter" Content="发送内容加入回车" HorizontalAlignment="Left" Margin="49,65,0,0" VerticalAlignment="Top" FontSize="18" Width="178"/>
+                    <GroupBox x:Name="GBox2" Header="数据接收窗口" HorizontalAlignment="Left" Height="231" Margin="49,328,0,0" VerticalAlignment="Top" Width="683" FontSize="18">
+                        <RichTextBox x:Name="RBoxRec" HorizontalAlignment="Left" Height="146" Margin="10,25,0,0" VerticalAlignment="Top" Width="637">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text=""/>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </GroupBox>
+                    <Button x:Name="SendBtn" Content="发送" HorizontalAlignment="Left" Margin="544,60,0,0" VerticalAlignment="Top" Width="75" FontSize="18" Click="SendBtn_Click"/>
+                    <ComboBox x:Name="EncodingCbx" DisplayMemberPath="Name" SelectedValuePath="Name" HorizontalAlignment="Left" Margin="299,61,0,0" VerticalAlignment="Top" Width="120"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Receive">
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock HorizontalAlignment="Left" Margin="44,21,0,0" TextWrapping="Wrap" Text="Ip:" VerticalAlignment="Top" Height="28" Width="63" FontSize="18"/>
+                    <TextBox x:Name="BoxIPRec"  HorizontalAlignment="Left" Height="23" Margin="107,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="18"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="298,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="63" FontSize="18"><Run Text="Port"/><Run Text=":"/></TextBlock>
+                    <TextBox x:Name="BoxPortRec" HorizontalAlignment="Left" Height="23" Margin="361,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="18"/>
+                    <Button x:Name="CreateBtnRec" Content="创建" HorizontalAlignment="Left" Margin="544,19,0,0" VerticalAlignment="Top" Width="75" FontSize="18" Click="CreateBtnRec_Click"/>
+                    <Button x:Name="ListenBtnRec" Content="监听" HorizontalAlignment="Left" Margin="652,19,0,0" VerticalAlignment="Top" Width="75" FontSize="18" RenderTransformOrigin="1.889,0.712" Click="ListenBtnRec_Click"/>
+                    <GroupBox x:Name="GBoxRec2" Header="数据接收窗口" HorizontalAlignment="Left" Height="231" Margin="49,328,0,0" VerticalAlignment="Top" Width="683" FontSize="18">
+                        <RichTextBox x:Name="RBoxServiceRec" HorizontalAlignment="Left" Height="146" Margin="10,25,0,0" VerticalAlignment="Top" Width="637">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text=""/>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
