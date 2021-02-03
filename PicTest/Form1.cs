@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gif.Components;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -20,6 +21,15 @@ namespace PicTest
             InitCb();
             InitLv();
             this.pbZoom.MouseDown += pbZoom_MouseDown;
+            this.pbZoom.MouseWheel += PbZoom_MouseWheel;
+        }
+
+        private void PbZoom_MouseWheel(object sender, MouseEventArgs e)
+        {
+            //MessageBox.Show($"鼠标位于所在区域，x:{e.X}, y:{e.Y}");
+            PointForm pf = new PointForm(e.X, e.Y);
+            pf.AddPointEvent += AddPointEvenHandle;
+            pf.ShowDialog();
         }
 
         private void pbZoom_MouseDown(object sender, MouseEventArgs e)
@@ -37,23 +47,37 @@ namespace PicTest
             }
         }
 
-        Dictionary<string, string> _ExistPointDicts = new Dictionary<string, string>();
         List<AddPointEventArgs> es = new List<AddPointEventArgs>();
         private void AddPointEvenHandle(object sender, AddPointEventArgs e)
         {
-            if(_ExistPointDicts.Keys.Any(r => r.Equals(e.PointName)))
+            if(es.Any(r => r.PointName.Equals(e.PointName)))
             {
                 MessageBox.Show("存在同名点位, 重新编辑");
                 return;
             }
             es.Add(e);
-            this.lvPoints.Invoke(new MethodInvoker(() => {
+            this.Invoke(new MethodInvoker(() => {
+                //更新lv内容
                 this.lvPoints.BeginUpdate();
                 List<string> contents = new List<string>() {
                     e.PointName,e.PointX,e.PointY
                 };
                 this.lvPoints.Items.Add(new ListViewItem(contents.ToArray()));
                 this.lvPoints.EndUpdate();
+                //合并bg和tag, 更新到pgZoom
+                //pbZoom.Image = UniteImage(pbZoom.Image, pbTag.Image, int.Parse(e.PointX), int.Parse(e.PointY));
+                //在panel中生成叠加pictureBox
+                var tagPicBox = new PictureBox()
+                {
+                    Width = pbTag.Width,
+                    Height = pbTag.Height,
+                    Left = int.Parse(e.PointX),
+                    Top = int.Parse(e.PointY),
+                    Image = pbTag.Image
+                };
+                //设置tagPic在最上面显示
+                this.pbZoom.Controls.Add(tagPicBox);
+                tagPicBox.BringToFront();
             }));
         }
 
@@ -64,6 +88,8 @@ namespace PicTest
             {
                 tbBg.Text = openFileDialog1.FileName;
                 pbBg.Image = Image.FromFile(tbBg.Text);
+                tbZoom.Text = openFileDialog1.FileName;
+                pbZoom.Image = Image.FromFile(tbZoom.Text);
             }            
         }
 
@@ -135,6 +161,7 @@ namespace PicTest
             cbZoom.DataSource = bs;
             cbZoom.ValueMember = "Key";
             cbZoom.DisplayMember = "Value";
+            cbZoom.SelectedIndex = 2;
         }
 
         private void InitLv()
@@ -182,6 +209,48 @@ namespace PicTest
         {
             var dt = NPOIHelper.ListToDataTable(es);
             NPOIHelper.Export(dt, "", "export.xls");
+            MessageBox.Show("导出成功");
+        }
+
+        string[] gifBases = new string[] { };
+        private void btnDirGif_Click(object sender, EventArgs e)
+        {
+            gifBases = new string[] { };
+            if(!Directory.Exists(tbGif.Text))
+            {
+                MessageBox.Show("目录不存在");
+                return;
+            }
+            var files = Directory.GetFiles(tbGif.Text);
+            gifBases = files;
+            if (gifBases.Length == 0)
+            {
+                MessageBox.Show("文件不存在");
+                return;
+            }
+        }
+
+        private void btnGetGif_Click(object sender, EventArgs e)
+        {
+            if (gifBases.Length == 0)
+            {
+                MessageBox.Show("文件不存在");
+                return;
+            }
+
+            string gifFile = "location.gif";
+            AnimatedGifEncoder gifEncoder = new AnimatedGifEncoder();
+            gifEncoder.Start(gifFile);
+            gifEncoder.SetDelay(500);
+            gifEncoder.SetRepeat(999);
+            gifEncoder.SetSize(40,40);
+            gifEncoder.SetTransparent(Color.Transparent);
+            for (int i = 0; i < gifBases.Length; i++)
+            {
+                gifEncoder.AddFrame(Image.FromFile(gifBases[i]));
+            }
+            gifEncoder.Finish();
+            pbGif.Image = Image.FromFile(gifFile);
         }
     }
 }
