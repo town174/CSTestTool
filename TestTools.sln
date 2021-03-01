@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicTest", "PicTest\PicTest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftUpdateTest", "SoftUpdateTest\SoftUpdateTest.csproj", "{E4856612-7B86-468A-8AB2-9E994A77E855}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTest", "WpfTest\WpfTest.csproj", "{7CCE2729-14AF-4238-87A5-B3A7E0DCDB79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{E4856612-7B86-468A-8AB2-9E994A77E855}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4856612-7B86-468A-8AB2-9E994A77E855}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4856612-7B86-468A-8AB2-9E994A77E855}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CCE2729-14AF-4238-87A5-B3A7E0DCDB79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCE2729-14AF-4238-87A5-B3A7E0DCDB79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCE2729-14AF-4238-87A5-B3A7E0DCDB79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCE2729-14AF-4238-87A5-B3A7E0DCDB79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
