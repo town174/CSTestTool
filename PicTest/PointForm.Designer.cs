@@ -91,7 +91,7 @@
             this.btnAddPoint.Name = "btnAddPoint";
             this.btnAddPoint.Size = new System.Drawing.Size(75, 23);
             this.btnAddPoint.TabIndex = 6;
-            this.btnAddPoint.Text = "新增";
+            this.btnAddPoint.Text = "编辑";
             this.btnAddPoint.UseVisualStyleBackColor = true;
             this.btnAddPoint.Click += new System.EventHandler(this.btnAddPoint_Click);
             // 
@@ -108,7 +108,7 @@
             this.Controls.Add(this.tbPointName);
             this.Controls.Add(this.label1);
             this.Name = "PointForm";
-            this.Text = "添加点位";
+            this.Text = "编辑点位";
             this.ResumeLayout(false);
             this.PerformLayout();
 

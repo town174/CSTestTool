@@ -13,8 +13,8 @@ namespace PicTest
     public class AddPointEventArgs : EventArgs
     {
         public string PointName { get; set; }
-        public string PointY { get; set; }
-        public string PointX { get; set; }
+        public int PointY { get; set; }
+        public int PointX { get; set; }
     }
 
     public partial class PointForm : Form
@@ -24,6 +24,15 @@ namespace PicTest
         public PointForm()
         {
             InitializeComponent();
+        }
+
+        public PointForm(string pointName, int x, int y)
+        {
+            InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
+            tbPointName.Text = pointName;
+            tbPointX.Text = x.ToString();
+            tbPointY.Text = y.ToString();
         }
 
         public PointForm(int x, int y)
@@ -41,8 +50,8 @@ namespace PicTest
             if (string.IsNullOrEmpty(tbPointY.Text)) { MessageBox.Show("请输入y坐标"); return; }
             this.AddPointEvent.Invoke(this, new AddPointEventArgs() {
                 PointName = tbPointName.Text,
-                PointX = tbPointX.Text,
-                PointY = tbPointY.Text
+                PointX = int.Parse(tbPointX.Text),
+                PointY = int.Parse(tbPointY.Text)
             });
         }
     }

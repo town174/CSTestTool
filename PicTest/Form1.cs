@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,65 +21,75 @@ namespace PicTest
             InitializeComponent();
             InitCb();
             InitLv();
-            this.pbZoom.MouseDown += pbZoom_MouseDown;
             this.pbZoom.MouseWheel += PbZoom_MouseWheel;
         }
 
         private void PbZoom_MouseWheel(object sender, MouseEventArgs e)
         {
-            //MessageBox.Show($"鼠标位于所在区域，x:{e.X}, y:{e.Y}");
-            PointForm pf = new PointForm(e.X, e.Y);
+            string pointName = _lvSelectIdx < 0 ? "" : lvPoints.Items[_lvSelectIdx].SubItems[0].Text;
+            PointForm pf = new PointForm(pointName,e.X, e.Y);
             pf.AddPointEvent += AddPointEvenHandle;
             pf.ShowDialog();
-        }
-
-        private void pbZoom_MouseDown(object sender, MouseEventArgs e)
-        {
-            //鼠标在pannel内生效，并且左键点击
-            if (e.Button == MouseButtons.Left)
-            {
-                MessageBox.Show($"鼠标位于所在区域，x:{e.X}, y:{e.Y}");
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                PointForm pf = new PointForm(e.X, e.Y);
-                pf.AddPointEvent += AddPointEvenHandle;
-                pf.ShowDialog();
-            }
         }
 
         List<AddPointEventArgs> es = new List<AddPointEventArgs>();
         private void AddPointEvenHandle(object sender, AddPointEventArgs e)
         {
-            if(es.Any(r => r.PointName.Equals(e.PointName)))
+            //todo e.x - tag.width / 2 , e.y - tag.height / 2
+            e.PointX = e.PointX - pbTag.Image.Width  / 2;
+            e.PointY = e.PointY - pbTag.Image.Height / 2;
+            if (!es.Any(r => r.PointName.Equals(e.PointName)))
             {
-                MessageBox.Show("存在同名点位, 重新编辑");
-                return;
+                es.Add(e);
             }
-            es.Add(e);
+            else
+            {
+                var exist = es.Find(r => r.PointName.Equals(e.PointName));
+                exist.PointX = e.PointX;
+                exist.PointY = e.PointY;
+            }
+            
             this.Invoke(new MethodInvoker(() => {
-                //更新lv内容
                 this.lvPoints.BeginUpdate();
+                //新增描点逻辑;
                 List<string> contents = new List<string>() {
-                    e.PointName,e.PointX,e.PointY
+                    e.PointName,e.PointX.ToString(),e.PointY.ToString()
                 };
                 this.lvPoints.Items.Add(new ListViewItem(contents.ToArray()));
-                this.lvPoints.EndUpdate();
-                //合并bg和tag, 更新到pgZoom
-                //pbZoom.Image = UniteImage(pbZoom.Image, pbTag.Image, int.Parse(e.PointX), int.Parse(e.PointY));
-                //在panel中生成叠加pictureBox
-                var tagPicBox = new PictureBox()
+                //更新描点逻辑(更新本地，更新数据库)
+                if(_lvSelectIdx != -1)
                 {
-                    Width = pbTag.Width,
-                    Height = pbTag.Height,
-                    Left = int.Parse(e.PointX),
-                    Top = int.Parse(e.PointY),
-                    Image = pbTag.Image
-                };
-                //设置tagPic在最上面显示
-                this.pbZoom.Controls.Add(tagPicBox);
-                tagPicBox.BringToFront();
+                    lvPoints.Items[_lvSelectIdx].SubItems[1].Text = e.PointX.ToString();
+                    lvPoints.Items[_lvSelectIdx].SubItems[2].Text = e.PointY.ToString();
+                }
+                this.lvPoints.EndUpdate();
+                //更新图片
+                UpdateNav(e.PointX,e.PointY);
             }));
+        }
+
+        private void UpdateNav(int x, int y)
+        {
+            var cn = "tagCtl";
+            //合并bg和tag, 更新到pgZoom
+            //pbZoom.Image = UniteImage(pbZoom.Image, pbTag.Image, int.Parse(e.PointX), int.Parse(e.PointY));
+            //在panel中生成叠加pictureBox
+            var tagPicBox = new PictureBox()
+            {
+                Name = cn,
+                Width = pbTag.Width,
+                Height = pbTag.Height,
+                Left = x,
+                Top = y,
+                Image = pbTag.Image
+            };
+            //设置tagPic在最上面显示
+            //todo  移除已添加图片控件
+            var zoomCtls = this.pbZoom.Controls;
+            if (zoomCtls.ContainsKey(cn))
+                zoomCtls.RemoveByKey(cn);
+            zoomCtls.Add(tagPicBox);
+            tagPicBox.BringToFront();
         }
 
         private void btnBg_Click(object sender, EventArgs e)
@@ -169,7 +180,9 @@ namespace PicTest
             //设置detail视图
             lvPoints.View = View.Details;
             lvPoints.FullRowSelect = true;
+            lvPoints.MultiSelect = false;
             lvPoints.GridLines = true;
+            lvPoints.SelectedIndexChanged += LvPoints_SelectedIndexChanged;
             //创建表头
             Dictionary<string, int> chDicts = new Dictionary<string, int>() {
                 ["点位名称"] = 150,
@@ -183,6 +196,34 @@ namespace PicTest
                 ch.Width = kv.Value;
                 ch.TextAlign = HorizontalAlignment.Left;
                 lvPoints.Columns.Add(ch);
+            }
+            //从数据库加载数据
+            var data = DapperUtils.Query<BookShelfLocation>("SELECT * from bookshelflocations").OrderBy(x => x.BookShelfName);
+            //添加lv内容
+            this.lvPoints.BeginUpdate();
+            foreach (var item in data)
+            {
+                List<string> contents = new List<string>() {
+                    item.BookShelfName,item.CoordinateX.ToString(),item.CoordinateY.ToString()
+                };
+                this.lvPoints.Items.Add(new ListViewItem(contents.ToArray()));
+            }
+            this.lvPoints.EndUpdate();
+        }
+
+        int _lvSelectIdx = -1;
+        private void LvPoints_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var si = lvPoints.SelectedIndices;
+            if (si.Count > 0)
+            {
+                int idx = si[0];
+                _lvSelectIdx = idx;
+                var pointName = lvPoints.Items[idx].SubItems[0].Text;
+                var pointX = lvPoints.Items[idx].SubItems[1].Text;
+                var pointY = lvPoints.Items[idx].SubItems[2].Text;
+                //MessageBox.Show($"{pointName},{pointX},{pointY}");
+                UpdateNav(int.Parse(pointX), int.Parse(pointY));
             }
         }
 
@@ -203,13 +244,6 @@ namespace PicTest
             if (mouse.Y < ctPoint.Y) return false;
             if (mouse.Y > ctPoint.Y + ctSize.Height) return false;
             return true;
-        }
-
-        private void btnExport_Click(object sender, EventArgs e)
-        {
-            var dt = NPOIHelper.ListToDataTable(es);
-            NPOIHelper.Export(dt, "", "export.xls");
-            MessageBox.Show("导出成功");
         }
 
         string[] gifBases = new string[] { };
@@ -251,6 +285,25 @@ namespace PicTest
             }
             gifEncoder.Finish();
             pbGif.Image = Image.FromFile(gifFile);
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            var dt = NPOIHelper.ListToDataTable(es);
+            NPOIHelper.Export(dt, "", "export.xls");
+            MessageBox.Show("导出成功");
+        }
+
+        private void btnDb_Click(object sender, EventArgs e)
+        {
+            string sql = "";
+            foreach (var p in es)
+            {
+                sql = $"UPDATE bookshelflocations set CoordinateX = '{p.PointX}', CoordinateY = '{p.PointY}' WHERE BookShelfName = '{p.PointName}';";
+                DapperUtils.Execute(sql);
+                Thread.Sleep(100);
+            }
+            MessageBox.Show("导出成功");
         }
     }
 }

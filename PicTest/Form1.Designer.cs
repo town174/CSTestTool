@@ -48,6 +48,7 @@
             this.tbGif = new System.Windows.Forms.TextBox();
             this.btnDirGif = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnDb = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.lvPoints = new System.Windows.Forms.ListView();
             this.label4 = new System.Windows.Forms.Label();
@@ -99,7 +100,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 424);
+            this.tabPage1.Size = new System.Drawing.Size(797, 433);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "图像合并";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -217,7 +218,7 @@
             this.tabPage3.Controls.Add(this.btnDirGif);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(792, 424);
+            this.tabPage3.Size = new System.Drawing.Size(797, 433);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "合成gif";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -260,6 +261,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnDb);
             this.tabPage2.Controls.Add(this.btnExport);
             this.tabPage2.Controls.Add(this.lvPoints);
             this.tabPage2.Controls.Add(this.label4);
@@ -276,13 +278,23 @@
             this.tabPage2.Text = "坐标描点";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnDb
+            // 
+            this.btnDb.Location = new System.Drawing.Point(120, 347);
+            this.btnDb.Name = "btnDb";
+            this.btnDb.Size = new System.Drawing.Size(75, 23);
+            this.btnDb.TabIndex = 14;
+            this.btnDb.Text = "导出数据库";
+            this.btnDb.UseVisualStyleBackColor = true;
+            this.btnDb.Click += new System.EventHandler(this.btnDb_Click);
+            // 
             // btnExport
             // 
             this.btnExport.Location = new System.Drawing.Point(9, 347);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(75, 23);
             this.btnExport.TabIndex = 13;
-            this.btnExport.Text = "导出点位";
+            this.btnExport.Text = "导出excle";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
@@ -353,7 +365,7 @@
             this.btnZoom.Name = "btnZoom";
             this.btnZoom.Size = new System.Drawing.Size(75, 23);
             this.btnZoom.TabIndex = 2;
-            this.btnZoom.Text = "打开图像";
+            this.btnZoom.Text = "打开背景图";
             this.btnZoom.UseVisualStyleBackColor = true;
             this.btnZoom.Click += new System.EventHandler(this.btnZoom_Click);
             // 
@@ -419,6 +431,7 @@
         private System.Windows.Forms.Button btnDirGif;
         private System.Windows.Forms.PictureBox pbGif;
         private System.Windows.Forms.Button btnGetGif;
+        private System.Windows.Forms.Button btnDb;
     }
 }
 
