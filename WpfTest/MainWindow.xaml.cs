@@ -53,9 +53,13 @@ namespace WpfTest
 
         private void btDp_Click(object sender, RoutedEventArgs e)
         {
-            
-            //stu.SetValue(Student.NameProperty, this.tbdp1.Text);
-            //this.tbdp2.Text = (string)stu.GetValue(Student.NameProperty);
+
+        }
+
+        private void btnCar_Click(object sender, RoutedEventArgs e)
+        {
+            CarListWnd w = new CarListWnd();
+            w.ShowDialog();
         }
     }
 

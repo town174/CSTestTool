@@ -66,6 +66,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CarListWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CarCtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -74,8 +82,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CarListWnd.xaml.cs">
+      <DependentUpon>CarListWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CarCtl.xaml.cs">
+      <DependentUpon>CarCtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Convert\Car2Image.cs" />
+    <Compile Include="Convert\Com2LogoConverter.cs" />
     <Compile Include="Convert\L2BConverter.cs" />
     <Compile Include="Dependency\Student.cs" />
+    <Compile Include="Entity\Car.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -107,6 +124,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assert\Images\Camry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assert\Images\A4.png" />
+    <Resource Include="Assert\Images\Q5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assert\Logos\Audi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assert\Logos\Toyota.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

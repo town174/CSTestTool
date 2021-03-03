@@ -48,7 +48,7 @@
                 <Label>Unstyled Button</Label>
                 <Button>Button 1</Button>
                 <Label>Unstyled Button</Label>
-                <Button Style="{StaticResource RoundButton}" Height="65" Width="65" FontSize="15">Button2</Button>
+                <Button Style="{StaticResource RoundButton}" Height="65" Width="65" FontSize="15" Click="btnCar_Click">CarList</Button>
             </StackPanel>
         </GroupBox>        
     </Grid>
