@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:WpfTest.Assert.Styles"
                     xmlns:cvrt="clr-namespace:WpfTest.Convert">
     <cvrt:L2BConverter x:Key="l2b"></cvrt:L2BConverter>
     <Style x:Key="styleTextBox" TargetType="TextBox">
@@ -10,15 +9,15 @@
                 <Setter Property="BorderBrush" Value="Red"/>
                 <Setter Property="BorderThickness" Value="1"/>
             </DataTrigger>
-            <!--有bug-->
-            <EventTrigger RoutedEvent="MouseEnter">
+            <!--EvevtTrigger有bug-->
+            <!--<EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
                         <DoubleAnimation To="150" Duration="0:0:0:2" Storyboard.TargetProperty="Width"/>
                         <DoubleAnimation To="150" Duration="0:0:0:2" Storyboard.TargetProperty="Height"/>
                     </Storyboard>
                 </BeginStoryboard>
-            </EventTrigger>
+            </EventTrigger>-->
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

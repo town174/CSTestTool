@@ -29,7 +29,7 @@ namespace WpfTest
             //添加事件监听RouterEvent
             //不需要显示绑定某个控件~~, 解决发布者和订阅者耦合关系
             //绑定某个类型事件
-            this.GridA.AddHandler(Button.ClickEvent, new RoutedEventHandler(ButtonClick));
+            //this.GridA.AddHandler(Button.ClickEvent, new RoutedEventHandler(ButtonClick));
             this.StackPanelA.AddHandler(Button.ClickEvent, new RoutedEventHandler(ButtonClick));
             //设置数据绑定
             Binding binding = new Binding("Text") { Source = this.tbdp1 };

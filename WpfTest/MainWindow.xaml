@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Assert/Styles/CheckBox.xaml"/>
                 <ResourceDictionary Source="Assert/Styles/TextBox.xaml"/>
+                <ResourceDictionary Source="Assert/Templates/ButtonTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -19,6 +20,7 @@
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
         </Grid.RowDefinitions>
         <GroupBox Header="依赖属性" Height="100">
             <StackPanel>
@@ -41,5 +43,13 @@
                 <TextBox Style="{StaticResource styleTextBox}" Width="100"></TextBox>
             </StackPanel>
         </GroupBox>
+        <GroupBox Header="模板" Grid.Row="3">
+            <StackPanel Margin="10">
+                <Label>Unstyled Button</Label>
+                <Button>Button 1</Button>
+                <Label>Unstyled Button</Label>
+                <Button Style="{StaticResource RoundButton}" Height="65" Width="65" FontSize="15">Button2</Button>
+            </StackPanel>
+        </GroupBox>        
     </Grid>
 </Window>
