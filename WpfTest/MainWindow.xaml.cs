@@ -35,8 +35,43 @@ namespace WpfTest
             Binding binding = new Binding("Text") { Source = this.tbdp1 };
             BindingOperations.SetBinding(stu, Student.NameProperty, binding);
             this.tbdp2.SetBinding(TextBox.TextProperty, binding);
+            //初始化命令
+            InitCommand();
         }
 
+        //命令使用太麻烦
+        private void InitCommand()
+        {
+            //声明定义命令
+            RoutedCommand clearCmd = new RoutedCommand("Clear", typeof(MainWindow));
+            //设置命令源,指定快捷键
+            this.btnClear.Command = clearCmd;
+            clearCmd.InputGestures.Add(new KeyGesture(Key.C, ModifierKeys.Alt));
+            //设置命令目标
+            this.btnClear.CommandTarget = this.tbCmdConent;
+            //创建命令关联
+            CommandBinding cb = new CommandBinding(clearCmd);
+            cb.CanExecute += Cb_CanExecute;
+            cb.Executed += Cb_Executed;
+            //外围容器添加命令关联
+            this.spCmd.CommandBindings.Add(cb);
+        }
+
+        //命令执行内容
+        private void Cb_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.tbCmdConent.Clear();
+            e.Handled = true;
+        }
+
+        //命令执行条件
+        private void Cb_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.tbCmdConent.Text)) e.CanExecute = false;
+            else e.CanExecute = true;
+            e.Handled = true;
+        }
+        
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show((sender as Panel).Name);
@@ -60,6 +95,17 @@ namespace WpfTest
         {
             CarListWnd w = new CarListWnd();
             w.ShowDialog();
+        }
+
+        private void Copy_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = !string.IsNullOrEmpty(this.tbCmd1.Text);
+            e.Handled = false;
+        }
+
+        private void Copy_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.tbCmd2.Text = this.tbCmd1.Text;
         }
     }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="WpfTest" Height="500" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,40 +16,56 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid Name="GridA">
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="200"></RowDefinition>
-        </Grid.RowDefinitions>
-        <GroupBox Header="依赖属性" Height="100">
-            <StackPanel>
-                <TextBox Name="tbdp1"></TextBox>
-                <TextBox Name="tbdp2"></TextBox>
-                <Button  Name="btDp" Click="btDp_Click">设置属性</Button>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Header="路由事件" Grid.Row="1">
-            <StackPanel Name="StackPanelA">
-                <Button Name="Router1" Content="Router1"></Button>
-                <Button Name="Router2" Content="Router2"></Button>
-                <Button Name="Router3" Content="Router3"/>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Header="样式" Grid.Row="2">
-            <StackPanel>
-                <CheckBox Style="{StaticResource StyleCheckBox}">123</CheckBox>
-                <CheckBox>456</CheckBox>
-                <TextBox Style="{StaticResource styleTextBox}" Width="100"></TextBox>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Header="模板" Grid.Row="3">
-            <StackPanel Margin="10">
-                <Label>Unstyled Button</Label>
-                <Button>Button 1</Button>
-                <Label>Unstyled Button</Label>
-                <Button Style="{StaticResource RoundButton}" Height="65" Width="65" FontSize="15" Click="btnCar_Click">CarList</Button>
-            </StackPanel>
-        </GroupBox>        
+        </Grid.RowDefinitions>-->
+        <TabControl>
+            <TabItem Header="依赖属性">
+                <StackPanel>
+                    <TextBox Name="tbdp1"></TextBox>
+                    <TextBox Name="tbdp2"></TextBox>
+                    <Button  Name="btDp" Click="btDp_Click">设置属性</Button>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="路由事件">
+                <StackPanel Name="StackPanelA">
+                    <Button Name="Router1" Content="Router1"></Button>
+                    <Button Name="Router2" Content="Router2"></Button>
+                    <Button Name="Router3" Content="Router3"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="样式">
+                <StackPanel>
+                    <CheckBox Style="{StaticResource StyleCheckBox}">123</CheckBox>
+                    <CheckBox>456</CheckBox>
+                    <TextBox Style="{StaticResource styleTextBox}" Width="100"></TextBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="模板">
+                <StackPanel>
+                    <Label>Unstyled Button</Label>
+                    <Button>Button 1</Button>
+                    <Label>DataTemplate Button</Label>
+                    <Button Style="{StaticResource RoundButton}" Height="65" Width="65" FontSize="15" Click="btnCar_Click">CarList</Button>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="命令">
+                <StackPanel Name="spCmd">
+                    <Button Name="btnClear" Content="Clear" Margin="5,10"></Button>
+                    <TextBox Name="tbCmdConent" Margin="10,5" TextAlignment="Center"></TextBox>
+                    <!-- Command="ApplicationCommands.Copy"-->
+                    <Button Name="btnCopy" Content="Copy" Margin="5,10" Command="ApplicationCommands.Copy"></Button>
+                    <TextBox Name="tbCmd1" Margin="10,5" TextAlignment="Center"></TextBox>
+                    <TextBox Name="tbCmd2" Margin="10,5" TextAlignment="Center"></TextBox>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
+    <!--Window.CommandBindings位于cmd前不生效。。-->
+    <Window.CommandBindings>
+        <CommandBinding Command="Copy" CanExecute="Copy_CanExecute" Executed="Copy_Executed"></CommandBinding>
+    </Window.CommandBindings>
 </Window>
