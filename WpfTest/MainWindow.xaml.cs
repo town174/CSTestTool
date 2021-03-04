@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfTest.Dependency;
+using WpfTest.Entity;
 
 namespace WpfTest
 {
@@ -22,7 +23,7 @@ namespace WpfTest
     /// </summary>
     public partial class MainWindow : Window
     {
-        Student stu = new Student();
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -31,12 +32,32 @@ namespace WpfTest
             //绑定某个类型事件
             //this.GridA.AddHandler(Button.ClickEvent, new RoutedEventHandler(ButtonClick));
             this.StackPanelA.AddHandler(Button.ClickEvent, new RoutedEventHandler(ButtonClick));
-            //设置数据绑定
+            //依赖属性
+            Student stu = new Student();
             Binding binding = new Binding("Text") { Source = this.tbdp1 };
             BindingOperations.SetBinding(stu, Student.NameProperty, binding);
             this.tbdp2.SetBinding(TextBox.TextProperty, binding);
+            //初始化数据绑定
+            InitDataBinding();
             //初始化命令
             InitCommand();
+        }
+
+        void InitDataBinding()
+        {
+            //绑定对象
+            Teacher tec = new Teacher { Name = "echo" };
+            this.tb2.SetBinding(TextBox.TextProperty, new Binding("Name") { Source = tec });
+
+            //绑定集合
+            List<Teacher> stus = new List<Teacher>() {
+                new Teacher(){ Name = "abby",Age = "20"},
+                new Teacher(){ Name = "john",Age = "35"}
+            };
+            lsView.ItemsSource = stus;
+            lsView.DisplayMemberPath = "Name";
+            tbAge.SetBinding(TextBox.TextProperty, 
+                new Binding("SelectedItem.Age") { Source = this.lsView });
         }
 
         //命令使用太麻烦
