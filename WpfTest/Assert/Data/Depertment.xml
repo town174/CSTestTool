@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Department Name="公司部门">
+  <Department Name="软件组">
+    <Department Name="Tom"/>
+    <Department Name="Tom1"/>
+  </Department>
+  <Department Name="客服组">
+    <Department Name="Tim"/>
+    <Department Name="Tim1"/>
+  </Department>
+</Department> 

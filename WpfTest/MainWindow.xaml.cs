@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfTest.Dependency;
 using WpfTest.Entity;
+using System.Collections.Specialized;
+using WpfTest.Validater;
+using WpfTest.Convert;
 
 namespace WpfTest
 {
@@ -43,21 +48,116 @@ namespace WpfTest
             InitCommand();
         }
 
+        List<Teacher> tecs1 = new List<Teacher>();
+        ObservableCollection<Teacher> tecs2 = new ObservableCollection<Teacher>();
+        DataTable dt = new DataTable();
         void InitDataBinding()
         {
             //绑定对象
             Teacher tec = new Teacher { Name = "echo" };
             this.tb2.SetBinding(TextBox.TextProperty, new Binding("Name") { Source = tec });
 
-            //绑定集合
-            List<Teacher> stus = new List<Teacher>() {
-                new Teacher(){ Name = "abby",Age = "20"},
-                new Teacher(){ Name = "john",Age = "35"}
+            //绑定list
+            tecs1 = new List<Teacher>() {
+                new Teacher(){ Name = "abby", Age = "20"},
+                new Teacher(){ Name = "john", Age = "35"}
             };
-            lsView.ItemsSource = stus;
-            lsView.DisplayMemberPath = "Name";
-            tbAge.SetBinding(TextBox.TextProperty, 
-                new Binding("SelectedItem.Age") { Source = this.lsView });
+            lsView1.ItemsSource = tecs1;
+            lsView1.DisplayMemberPath = "Name";
+            tbAge1.SetBinding(TextBox.TextProperty, 
+                new Binding("SelectedItem.Age") { Source = this.lsView1 });
+
+            //绑定observableCollection
+            tecs2 = new ObservableCollection<Teacher>() {
+                new Teacher(){ Name = "abby", Age = "20", Class="5"},
+                new Teacher(){ Name = "john", Age = "35", Class="10"}
+            };
+            tecs2.CollectionChanged += Tecs2_CollectionChanged;
+            //lsView2.DataContext = tecs2;
+            lsView2.ItemsSource = tecs2;            
+            lsView2.DisplayMemberPath = "Name";
+            tbAge2.SetBinding(TextBox.TextProperty,
+                new Binding("SelectedItem.Age") { Source = this.lsView2 });
+
+            //绑定DataTable
+            dt.Columns.Add("Age", typeof(string));
+            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("Class", typeof(string));
+            foreach (var item in tecs2)
+            {
+                DataRow dr = dt.NewRow();
+                dr[0] = item.Age;
+                dr[1] = item.Name;
+                dr[2] = item.Class;
+                dt.Rows.Add(dr);
+            }
+            lsView3.DataContext = dt;
+            lsView3.SetBinding(ListView.ItemsSourceProperty, new Binding());
+
+            //绑定XmlDataProvider, xml作为数据传输保存格式应用太少了
+            XmlDataProvider xdp = new XmlDataProvider();
+            xdp.Source = new Uri("/Assert/Data/Depertment.xml",UriKind.Relative);
+            xdp.XPath = @"/Department";
+            tvDepartment.DataContext = xdp;
+            tvDepartment.SetBinding(TreeView.ItemsSourceProperty, new Binding());
+
+            //绑定相对资源
+            RelativeSource rs = new RelativeSource();
+            rs.AncestorLevel = 1;
+            rs.AncestorType = typeof(StackPanel);
+            this.tbRelative.SetBinding(TextBlock.TextProperty, new Binding("Name") { RelativeSource = rs });
+
+            #region 绑定校验器
+            //绑定校验器
+            Binding bind = new Binding("Value") { ElementName = "sldValid" };
+            //设置更新绑定源方式
+            bind.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            //设置校验失败通知
+            bind.NotifyOnValidationError = true;
+            //创建校验器
+            RangeValidator rvr = new RangeValidator();
+            //设置校验
+            rvr.ValidatesOnTargetUpdated = true;
+            bind.ValidationRules.Add(rvr);
+            //绑定
+            this.tbValid.SetBinding(TextBox.TextProperty, bind);
+            //设置校验失败处理事件
+            this.tbValid.AddHandler(Validation.ErrorEvent, new RoutedEventHandler((s, e) => {
+                if (Validation.GetErrors(this.tbValid).Count > 0)
+                {
+                    this.tbValid.ToolTip = Validation.GetErrors(this.tbValid)[0].ErrorContent.ToString();
+                    e.Handled = true;
+                }
+            }));
+            //设置源更新时，移除tooltips
+            this.tbValid.TargetUpdated += (s, e) => {
+                (s as TextBox).ToolTip = "";
+            };
+            this.tbValid.SourceUpdated += (s, e) => {
+                (s as TextBox).ToolTip = "";
+            };
+            #endregion
+
+            //绑定多路器
+            Binding bm1 = new Binding("Text") { ElementName = "tbm1" };
+            Binding bm2 = new Binding("Text") { ElementName = "tbm2" };
+            MultiBinding mb = new MultiBinding();
+            mb.Converter = new MutilConvert();
+            mb.Bindings.Add(bm1);
+            mb.Bindings.Add(bm2);
+            this.btnMTest.SetBinding(Button.IsEnabledProperty, mb);
+        }
+
+        private void Tecs2_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                MessageBox.Show($"新增tec, {e.NewItems[0].ToString()}");
+            }
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                MessageBox.Show($"移除tec, {e.OldItems[0].ToString()}");
+            }
         }
 
         //命令使用太麻烦
@@ -127,6 +227,28 @@ namespace WpfTest
         private void Copy_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.tbCmd2.Text = this.tbCmd1.Text;
+        }
+
+        private void btnAddTec_Click(object sender, RoutedEventArgs e)
+        {
+            tecs1.Add(new Teacher() { Name = "mike", Age = "40" });
+        }
+
+        private void btnAddTec2_Click(object sender, RoutedEventArgs e)
+        {
+            tecs2.Add(new Teacher() { Name = "mike", Age = "40" });
+        }
+
+        private void btnRemoveTec2_Click(object sender, RoutedEventArgs e)
+        {
+            if(tecs2.Count >= 1)
+                tecs2.RemoveAt(tecs2.Count - 1);
+        }
+
+        private void btnMTest_Click(object sender, RoutedEventArgs e)
+        {
+            this.tbm1.Text = "";
+            this.tbm2.Text = "";
         }
     }
 

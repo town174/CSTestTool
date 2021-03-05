@@ -52,5 +52,10 @@ namespace WpfTest.Entity
                 }
             }
         }
+
+        public override string ToString()
+        {
+            return $"name:{_name},age:{_age},class:{_class}";
+        }
     }
 }

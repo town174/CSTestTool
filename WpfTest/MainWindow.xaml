@@ -62,12 +62,71 @@
                     </Border>
                     <Border BorderBrush="Purple" BorderThickness="2" Margin="5">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="itemControl绑定集合,所选学生的学号：" Margin="5"></TextBlock>
-                            <TextBox Name="tbAge" Width="100" Margin="5"></TextBox>
-                            <ListBox Name="lsView" Width="100" Margin="5"></ListBox>
-                            <Button  Content="添加学生" Width="100" Margin="5"></Button>
+                            <TextBlock Text="itemControl绑定list,所选tec的学号：" Margin="5"></TextBlock>
+                            <TextBox Name="tbAge1" Width="100" Margin="5"></TextBox>
+                            <ListBox Name="lsView1" Width="100" Margin="5"></ListBox>
+                            <Button  Name="btnAddTec" Content="添加tec" Width="100" Margin="5" Click="btnAddTec_Click"></Button>
                         </StackPanel>
                     </Border>
+                    <Border BorderBrush="Blue" BorderThickness="2" Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="itemControl绑定observableCollection,所选学生的学号：" Margin="5"></TextBlock>
+                            <TextBox Name="tbAge2" Width="100" Margin="5"></TextBox>
+                            <ListBox Name="lsView2" Width="100" Margin="5"></ListBox>
+                            <Button  Name="btnAddTec2"  Content="添加tec" Width="100" Margin="5" Click="btnAddTec2_Click"></Button>
+                            <Button  Name="btnRemoveTec2"  Content="删除tec" Width="100" Margin="5" Click="btnRemoveTec2_Click"></Button>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderBrush="GreenYellow" BorderThickness="2" Margin="5">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="ListView绑定datatable" Margin="5"></TextBlock>
+                            <ListView Name="lsView3">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="编号" Width="80" DisplayMemberBinding="{Binding Age}"/>
+                                        <GridViewColumn Header="姓名" Width="80" DisplayMemberBinding="{Binding Name}"/>
+                                        <GridViewColumn Header="班级" Width="80" DisplayMemberBinding="{Binding Class}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="2" Margin="5">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="treeView绑定xmldataprovider" Margin="5"></TextBlock>
+                            <TreeViewItem>
+                                <TreeViewItem.Header>各个部门以及其成员</TreeViewItem.Header>
+                                <TreeView x:Name="tvDepartment">
+                                    <TreeView.ItemTemplate>
+                                        <HierarchicalDataTemplate ItemsSource="{Binding XPath=Department}">
+                                            <TextBlock Text="{Binding XPath=@Name}"></TextBlock>
+                                        </HierarchicalDataTemplate>
+                                    </TreeView.ItemTemplate>
+                                </TreeView>
+                            </TreeViewItem>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderBrush="Pink" BorderThickness="2" Margin="5">
+                        <StackPanel Name="spRel" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Label Content="ui绑定相对资源"></Label>
+                            <TextBlock Name="tbRelative" Width="100" Margin="5" TextAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderBrush="Red" BorderThickness="2" Margin="5">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Label Content="校验器" Margin="5"></Label>
+                            <TextBox Name="tbValid" Width="100" TextAlignment="Center" Margin="5"></TextBox>
+                            <Slider Name="sldValid" Width="400" VerticalAlignment="Center" Margin="5" Maximum="200"></Slider>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderBrush="Orange" BorderThickness="2" Margin="5">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+                            <Label Content="ui绑定多路资源" Margin="5"></Label>
+                            <TextBox Name="tbm1" Width="100" Margin="5"></TextBox>
+                            <TextBox Name="tbm2" Width="100" Margin="5"></TextBox>
+                            <Button  Name="btnMTest" Width="100" Margin="5" Click="btnMTest_Click">清空</Button>
+                        </StackPanel>
+                    </Border>                    
                 </StackPanel>
             </TabItem>
             <TabItem Header="样式">
