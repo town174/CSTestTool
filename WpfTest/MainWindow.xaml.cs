@@ -250,6 +250,12 @@ namespace WpfTest
             this.tbm1.Text = "";
             this.tbm2.Text = "";
         }
+
+        private void BtnRes_Click(object sender, RoutedEventArgs e)
+        {
+            this.Resources["staticRes"] = "静态资源发生改变";
+            this.Resources["dynamicRes"] = "动态资源发生改变";
+        }
     }
 
     public class ReportTimeEventArgs : RoutedEventArgs

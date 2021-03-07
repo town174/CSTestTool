@@ -57,6 +57,10 @@
     </ApplicationDefinition>
     <Compile Include="Convert\MutilConvert.cs" />
     <Compile Include="Validator\RangeValidator.cs" />
+    <Page Include="Assert\Data\UsefulRes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assert\Styles\CheckBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
