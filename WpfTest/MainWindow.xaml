@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTest"
         xmlns:et ="clr-namespace:WpfTest.Entity"
+        xmlns:wc ="clr-namespace:System.Windows.Controls"
         mc:Ignorable="d"
         Title="WpfTest" Height="650" Width="800">
     <Window.Resources>
@@ -14,11 +15,12 @@
                 <ResourceDictionary Source="Assert/Styles/TextBox.xaml"/>
                 <ResourceDictionary Source="Assert/Templates/ButtonTemplate.xaml"/>
                 <ResourceDictionary Source="Assert/Data/UsefulRes.xaml"/>
+                <ResourceDictionary Source="Assert/Templates/HeaderContentTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Name="GridA">
-        <TabControl>
+        <TabControl Name="TcBase">
             <TabItem Header="依赖属性">
                 <StackPanel>
                     <TextBox Name="tbdp1"></TextBox>
@@ -161,7 +163,17 @@
                     <TextBox  Name="tbDynRes" Margin="10,5" TextAlignment="Center" Text="{DynamicResource dynamicRes}"></TextBox>
                     <Button   Name="btnRes" Content="更换资源" Click="BtnRes_Click"></Button>
                 </StackPanel>
-            </TabItem>            
+            </TabItem>
+            <TabItem Header="控件">
+                <StackPanel Orientation="Vertical">
+                    <HeaderedContentControl Header="header1">
+                        <Button>btn1</Button>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="header2" Style="{StaticResource HcTemplate}">
+                        <CheckBox IsChecked="True">ckb1</CheckBox>
+                    </HeaderedContentControl>
+                </StackPanel>
+            </TabItem>
         </TabControl>
     </Grid>
     <!--Window.CommandBindings位于cmd前不生效。。-->

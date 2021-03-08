@@ -46,6 +46,25 @@ namespace WpfTest
             InitDataBinding();
             //初始化命令
             InitCommand();
+            //初始化控件
+            InitControl();
+        }
+
+        void InitControl()
+        {
+            //添加head控件
+            HeaderedContentControl hc = new HeaderedContentControl();
+            hc.Header = "header";
+            hc.Content = new Button() { Content = "Button", Width = 100, HorizontalAlignment = HorizontalAlignment.Center };
+            hc.Style = this.FindResource("HcTemplate") as Style;
+
+            //加入主界面
+            StackPanel sp = new StackPanel();
+            sp.Children.Add(hc);
+            TabItem ti = new TabItem();
+            ti.Header = "控件";
+            ti.Content = sp;
+            this.TcBase.Items.Add(ti);
         }
 
         List<Teacher> tecs1 = new List<Teacher>();
