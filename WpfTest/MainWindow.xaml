@@ -16,6 +16,8 @@
                 <ResourceDictionary Source="Assert/Templates/ButtonTemplate.xaml"/>
                 <ResourceDictionary Source="Assert/Data/UsefulRes.xaml"/>
                 <ResourceDictionary Source="Assert/Templates/HeaderContentTemplate.xaml"/>
+                <!--<ResourceDictionary Source="Assert/Lang/en-us/Tips.xaml"/>-->
+                <ResourceDictionary Source="Assert/Lang/zh-cn/Tips.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -162,6 +164,13 @@
                     <TextBox  Name="tbStaRes" Margin="10,5" TextAlignment="Center" Text="{StaticResource staticRes}"></TextBox>
                     <TextBox  Name="tbDynRes" Margin="10,5" TextAlignment="Center" Text="{DynamicResource dynamicRes}"></TextBox>
                     <Button   Name="btnRes" Content="更换资源" Click="BtnRes_Click"></Button>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="国际化">
+                <StackPanel>
+                    <Button Name="btnLangCh" Click="btnLangCh_Click">中文</Button>
+                    <Button Name="btnLangEn" Click="btnLangEn_Click">英文</Button>
+                    <TextBlock TextAlignment="Center" Text="{DynamicResource welcome}"></TextBlock>
                 </StackPanel>
             </TabItem>
             <TabItem Header="控件">

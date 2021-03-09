@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfTest.Dependency;
 using WpfTest.Entity;
 using System.Collections.Specialized;
@@ -47,7 +39,13 @@ namespace WpfTest
             //初始化命令
             InitCommand();
             //初始化控件
-            InitControl();
+            //InitControl();
+            InitMutilLang();
+        }
+
+        void InitMutilLang()
+        {
+
         }
 
         void InitControl()
@@ -274,6 +272,47 @@ namespace WpfTest
         {
             this.Resources["staticRes"] = "静态资源发生改变";
             this.Resources["dynamicRes"] = "动态资源发生改变";
+        }
+
+        private void btnLangCh_Click(object sender, RoutedEventArgs e)
+        {
+            var appResource = App.Current.Resources.MergedDictionaries;
+            foreach (ResourceDictionary item in appResource)
+            {
+                if (item.Source.ToString() == "Assert/Lang/zh-cn/Tips.xaml")
+                {
+                    return;
+                }
+                if (item.Source.ToString() == "Assert/Lang/en-us/Tips.xaml")
+                {
+                    appResource.Remove(item);
+                    break;
+                }
+            }
+            ResourceDictionary resdic = new ResourceDictionary();
+            resdic.Source = new Uri("Assert/Lang/zh-cn/Tips.xaml", UriKind.Relative);
+            appResource.Add(resdic);
+            
+        }
+
+        private void btnLangEn_Click(object sender, RoutedEventArgs e)
+        {
+            var appResource = App.Current.Resources.MergedDictionaries;
+            foreach (ResourceDictionary item in appResource)
+            {
+                if (item.Source.ToString() == "Assert/Lang/en-us/Tips.xaml")
+                {
+                    return;
+                }
+                if (item.Source.ToString() == "Assert/Lang/zh-cn/Tips.xaml")
+                {
+                    appResource.Remove(item);
+                    break;
+                }
+            }
+            ResourceDictionary resdic = new ResourceDictionary();
+            resdic.Source = new Uri("Assert/Lang/en-us/Tips.xaml", UriKind.Relative);
+            appResource.Add(resdic);//Insert(0, resdic);
         }
     }
 
