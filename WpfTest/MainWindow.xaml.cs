@@ -274,25 +274,27 @@ namespace WpfTest
             this.Resources["dynamicRes"] = "动态资源发生改变";
         }
 
+        string ens = "Assert/Lang/en-us/Tips.xaml";
+        string zhs = "Assert/Lang/zh-cn/Tips.xaml";
         private void btnLangCh_Click(object sender, RoutedEventArgs e)
         {
             var appResource = App.Current.Resources.MergedDictionaries;
             foreach (ResourceDictionary item in appResource)
             {
-                if (item.Source.ToString() == "Assert/Lang/zh-cn/Tips.xaml")
+                if (item.Source.ToString() == zhs)
                 {
                     return;
                 }
-                if (item.Source.ToString() == "Assert/Lang/en-us/Tips.xaml")
+                if (item.Source.ToString() == ens)
                 {
                     appResource.Remove(item);
                     break;
                 }
             }
+            appResource.Clear();
             ResourceDictionary resdic = new ResourceDictionary();
-            resdic.Source = new Uri("Assert/Lang/zh-cn/Tips.xaml", UriKind.Relative);
+            resdic.Source = new Uri(zhs, UriKind.Relative);
             appResource.Add(resdic);
-            
         }
 
         private void btnLangEn_Click(object sender, RoutedEventArgs e)
@@ -300,19 +302,20 @@ namespace WpfTest
             var appResource = App.Current.Resources.MergedDictionaries;
             foreach (ResourceDictionary item in appResource)
             {
-                if (item.Source.ToString() == "Assert/Lang/en-us/Tips.xaml")
+                if (item.Source.ToString() == ens)
                 {
                     return;
                 }
-                if (item.Source.ToString() == "Assert/Lang/zh-cn/Tips.xaml")
+                if (item.Source.ToString() == zhs)
                 {
                     appResource.Remove(item);
                     break;
                 }
             }
+            appResource.Clear();
             ResourceDictionary resdic = new ResourceDictionary();
-            resdic.Source = new Uri("Assert/Lang/en-us/Tips.xaml", UriKind.Relative);
-            appResource.Add(resdic);//Insert(0, resdic);
+            resdic.Source = new Uri(ens, UriKind.Relative);
+            appResource.Add(resdic);
         }
     }
 

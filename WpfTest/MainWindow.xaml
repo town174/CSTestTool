@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTest"
         xmlns:et ="clr-namespace:WpfTest.Entity"
-        xmlns:wc ="clr-namespace:System.Windows.Controls"
         mc:Ignorable="d"
         Title="WpfTest" Height="650" Width="800">
     <Window.Resources>
@@ -16,7 +15,7 @@
                 <ResourceDictionary Source="Assert/Templates/ButtonTemplate.xaml"/>
                 <ResourceDictionary Source="Assert/Data/UsefulRes.xaml"/>
                 <ResourceDictionary Source="Assert/Templates/HeaderContentTemplate.xaml"/>
-                <!--<ResourceDictionary Source="Assert/Lang/en-us/Tips.xaml"/>-->
+                <ResourceDictionary Source="Assert/Lang/en-us/Tips.xaml"/>
                 <ResourceDictionary Source="Assert/Lang/zh-cn/Tips.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -167,6 +166,7 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="国际化">
+                <!--未生效-->
                 <StackPanel>
                     <Button Name="btnLangCh" Click="btnLangCh_Click">中文</Button>
                     <Button Name="btnLangEn" Click="btnLangEn_Click">英文</Button>

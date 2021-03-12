@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1EECDE32-01EC-49BE-9FE1-92C6C94DC80E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VbtCode</RootNamespace>
+    <AssemblyName>VbtCode</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="NetAPI.Communication\COM.cs" />
+    <Compile Include="NetAPI.Communication\NetSocket.cs" />
+    <Compile Include="NetAPI.Communication\TcpClient.cs" />
+    <Compile Include="NetAPI.Communication\TcpServer.cs" />
+    <Compile Include="NetAPI.Communication\UDP.cs" />
+    <Compile Include="NetAPI.Core\AbstractReader.cs" />
+    <Compile Include="NetAPI.Core\AbstractReaders.cs" />
+    <Compile Include="NetAPI.Core\ApiExceptionHandle.cs" />
+    <Compile Include="NetAPI.Core\BrokenNetworkHandle.cs" />
+    <Compile Include="NetAPI.Core\BufferReceivedHandle.cs" />
+    <Compile Include="NetAPI.Core\BuffReceivedHandle.cs" />
+    <Compile Include="NetAPI.Core\ErrorMessageHandle.cs" />
+    <Compile Include="NetAPI.Core\ICommunication.cs" />
+    <Compile Include="NetAPI.Core\IHostMessage.cs" />
+    <Compile Include="NetAPI.Core\IProcess.cs" />
+    <Compile Include="NetAPI.Core\IReaderMessage.cs" />
+    <Compile Include="NetAPI.Core\MsgReceivedHandle.cs" />
+    <Compile Include="NetAPI.Core\OnAddReaderHandle.cs" />
+    <Compile Include="NetAPI.Core\OnAddSocketHandle.cs" />
+    <Compile Include="NetAPI.Core\OnDelReaderHandle.cs" />
+    <Compile Include="NetAPI.Core\OnDelSocketHandle.cs" />
+    <Compile Include="NetAPI.Core\ReaderMessageReceivedHandle.cs" />
+    <Compile Include="NetAPI.Core\ReceivedInfo.cs" />
+    <Compile Include="NetAPI.Entities\ActiveParameter.cs" />
+    <Compile Include="NetAPI.Entities\ActiveRfidParameter.cs" />
+    <Compile Include="NetAPI.Entities\ActiveTagData.cs" />
+    <Compile Include="NetAPI.Entities\ActiveTagData_04.cs" />
+    <Compile Include="NetAPI.Entities\ActiveTagData_V17.cs" />
+    <Compile Include="NetAPI.Entities\ActiveTagData_YT5001.cs" />
+    <Compile Include="NetAPI.Entities\ActiveTagWriteIdParameter.cs" />
+    <Compile Include="NetAPI.Entities\ActiveTagWriteUserParameter.cs" />
+    <Compile Include="NetAPI.Entities\AirProtocol.cs" />
+    <Compile Include="NetAPI.Entities\AlarmInfo_04.cs" />
+    <Compile Include="NetAPI.Entities\AlarmInfo_V17.cs" />
+    <Compile Include="NetAPI.Entities\AntennaPower.cs" />
+    <Compile Include="NetAPI.Entities\AntennaPowerStatus.cs" />
+    <Compile Include="NetAPI.Entities\AntennaStatus.cs" />
+    <Compile Include="NetAPI.Entities\BingResult.cs" />
+    <Compile Include="NetAPI.Entities\CommunicationMode.cs" />
+    <Compile Include="NetAPI.Entities\ConnectResponse.cs" />
+    <Compile Include="NetAPI.Entities\CtrlBoardConfig_YC001.cs" />
+    <Compile Include="NetAPI.Entities\CtrlInfo_YC001.cs" />
+    <Compile Include="NetAPI.Entities\EpcAlarmConfig_AccessControl.cs" />
+    <Compile Include="NetAPI.Entities\Flag.cs" />
+    <Compile Include="NetAPI.Entities\FrequencyArea.cs" />
+    <Compile Include="NetAPI.Entities\FrequencyTable.cs" />
+    <Compile Include="NetAPI.Entities\GpioConfig_AccessControl.cs" />
+    <Compile Include="NetAPI.Entities\GpioDefinition.cs" />
+    <Compile Include="NetAPI.Entities\GpioInfo.cs" />
+    <Compile Include="NetAPI.Entities\GpioLevel.cs" />
+    <Compile Include="NetAPI.Entities\GpioLevelParameter.cs" />
+    <Compile Include="NetAPI.Entities\GpiStopCondition.cs" />
+    <Compile Include="NetAPI.Entities\GpiTriggerCondition.cs" />
+    <Compile Include="NetAPI.Entities\GpiTriggerParameter.cs" />
+    <Compile Include="NetAPI.Entities\HabAntennaStatus.cs" />
+    <Compile Include="NetAPI.Entities\InOutState.cs" />
+    <Compile Include="NetAPI.Entities\InventoryTagParameter.cs" />
+    <Compile Include="NetAPI.Entities\IpParameter.cs" />
+    <Compile Include="NetAPI.Entities\IrTrigger.cs" />
+    <Compile Include="NetAPI.Entities\KillTagParameter.cs" />
+    <Compile Include="NetAPI.Entities\LayerLightState.cs" />
+    <Compile Include="NetAPI.Entities\LED.cs" />
+    <Compile Include="NetAPI.Entities\LightState.cs" />
+    <Compile Include="NetAPI.Entities\LightSwitch.cs" />
+    <Compile Include="NetAPI.Entities\LockBank.cs" />
+    <Compile Include="NetAPI.Entities\LockTagParameter.cs" />
+    <Compile Include="NetAPI.Entities\LockType.cs" />
+    <Compile Include="NetAPI.Entities\MemoryBank.cs" />
+    <Compile Include="NetAPI.Entities\ReaderTcpMode.cs" />
+    <Compile Include="NetAPI.Entities\ReaderWorkMode.cs" />
+    <Compile Include="NetAPI.Entities\ReadTagParameter.cs" />
+    <Compile Include="NetAPI.Entities\RFFreq.cs" />
+    <Compile Include="NetAPI.Entities\RfidStatus.cs" />
+    <Compile Include="NetAPI.Entities\RFSpeed.cs" />
+    <Compile Include="NetAPI.Entities\RxdActiveTag.cs" />
+    <Compile Include="NetAPI.Entities\RxdTagData.cs" />
+    <Compile Include="NetAPI.Entities\ScanMode.cs" />
+    <Compile Include="NetAPI.Entities\SenssorTrigger.cs" />
+    <Compile Include="NetAPI.Entities\Session.cs" />
+    <Compile Include="NetAPI.Entities\SessionInfo.cs" />
+    <Compile Include="NetAPI.Entities\ShelfLight.cs" />
+    <Compile Include="NetAPI.Entities\TagActiveParameter.cs" />
+    <Compile Include="NetAPI.Entities\TagID_V17.cs" />
+    <Compile Include="NetAPI.Entities\TagMB.cs" />
+    <Compile Include="NetAPI.Entities\TagParameter.cs" />
+    <Compile Include="NetAPI.Entities\UhfBandTable.cs" />
+    <Compile Include="NetAPI.Entities\WorkMode.cs" />
+    <Compile Include="NetAPI.Entities\WorkMode_AccessControl.cs" />
+    <Compile Include="NetAPI.Entities\WriteTagParameter.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\AbstractHostMessage.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\AbstractReaderMessage.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\ActiveTagInventoryReceivedHandle.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\AutoPowersConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\Checksum.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\Common.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\CtrlUpdata_YC001Handle.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\Decode.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\EVB.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\FirmwareOnlineUpgradeHandle.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\InventoryReceivedHandle.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\KeepAlive_YC001Handle.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\LayerInfo.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MessageFrame.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MessageType.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\Msg6CTagFieldConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveAddress.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveAttenuationValueConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveBeepEnableConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveCommunicationModeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveFilteringTimeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveGpiTriggerConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveGpoConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveLedEnableConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveResetCpu.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveResetToFactoryDefault.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveRfidParameterConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveRssiThresholdConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveStandby.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveTagActive.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveTagActiveReceivedHandle.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveTagConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveTagInventory.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveTagInventory2.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveTagInventoryStop.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveTagSleep.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveTagSleepReceivedHandle.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveTagWriteID.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveTagWriteUser.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgActiveVersionQuery.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgAirProtocolConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgAlarmDataCacheClean_AccessControl.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgAlarmDataCacheNumQuery_AccessControl.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgAlarmInfo_AccessControl.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgAntennaConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgAppFirmwareOnlineUpgrade.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgAppFirmwareUpgradePreparation.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgCommunicationModeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgCpuVersionQuery.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgCtrlBoardConfig_YC001.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgCtrlUpdata_YC001.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgEpcAlarmConfig_AccessControl.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgFilteringConfig_YC002.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgFilteringTimeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgFirmwareOnlineUpgrade.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgFirmwareUpgradePreparation.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgFrequencyConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgGpioConfig_AccessControl.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgGpioDefinitionConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgGpioDefinitionQuery.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgGpiQuery.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgGpiTriggerConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgGpoConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgHubAntennaConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgHubAntennaInfoConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgHubAntennaPortDwellTimeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgHubAntennaTimeResidentConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgHubPowersConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgIdleTimeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgIntervalTimeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgIpAddressConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgKeepAlive.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgKeepAliveConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgKeepAliveConfig_YC001.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgKeepAlive_YC001.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgLightSwitchConfig_YC001.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgMacConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgMainCtrlBoardNO_YC001.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgMasterAndSlaveModeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgPortDwellTimeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgPowerConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgPowerOff.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgPowerOn.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgQValueConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgR2000ResetInformationReport.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgReaderCapabilityQuery.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgReaderVersionQuery.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgReaderWorkModeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgReadPowerConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgResetToFactoryDefault.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgResetToFactoryDefault_AccessControl.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgRfidStatusQuery.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgRs232BaudRateConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgRs485AddressConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgRs485BaudRateConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgRssiThresholdConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgScanModeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgSearchIp.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgSessionConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgShelfLightModeConfig_YC001.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgShelfLightStateConfig_YC001.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgSingleLayerLightStateConfig_YC001.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgSingleLightStateConfig_YC001.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgSlaveModeCacheClean.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgSlaveModeCacheCountQuery.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgSlaveModeCacheQuery.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgTagInventory.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgTagKill.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgTagLock.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgTagRead.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgTagSelect.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgTagWrite.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgTcpModeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgUhfBandConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgUtcConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgWifiHotspotConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgWifiIpAddressConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgWifiMacConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgWifiModeConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgWifiStatusConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgWorkModeConfig_AccessControl.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\MsgWritePowerConfig.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\OnAutoPowerConfigInventoryReceivedHandle.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\PowerMapping.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\Reader.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\Readers.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\RS485Item.cs" />
+    <Compile Include="NetAPI.Protocol.VRP\UdpSearchIpHandle.cs" />
+    <Compile Include="NetAPI\APIPath.cs" />
+    <Compile Include="NetAPI\BaudRate.cs" />
+    <Compile Include="NetAPI\DeviceCfg.cs" />
+    <Compile Include="NetAPI\DeviceCfgItem.cs" />
+    <Compile Include="NetAPI\ErrInfo.cs" />
+    <Compile Include="NetAPI\ErrInfoList.cs" />
+    <Compile Include="NetAPI\IPort.cs" />
+    <Compile Include="NetAPI\Log.cs" />
+    <Compile Include="NetAPI\LogChangeDelegate.cs" />
+    <Compile Include="NetAPI\LogChangeEventArgs.cs" />
+    <Compile Include="NetAPI\LogManager.cs" />
+    <Compile Include="NetAPI\LogType.cs" />
+    <Compile Include="NetAPI\MsgStatus.cs" />
+    <Compile Include="NetAPI\PortType.cs" />
+    <Compile Include="NetAPI\Rs232Port.cs" />
+    <Compile Include="NetAPI\Rs485Port.cs" />
+    <Compile Include="NetAPI\TcpClientPort.cs" />
+    <Compile Include="NetAPI\TcpServerPort.cs" />
+    <Compile Include="NetAPI\UdpPort.cs" />
+    <Compile Include="NetAPI\Util.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
