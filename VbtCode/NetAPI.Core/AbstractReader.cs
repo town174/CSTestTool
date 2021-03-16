@@ -1,3 +1,5 @@
+using NetAPI.Communication;
+using NetAPI.Protocol.VRP;
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -101,9 +103,10 @@ namespace NetAPI.Core
 			IPEndPoint iPEndPoint = (IPEndPoint)socket.RemoteEndPoint;
 			ReaderName = iPEndPoint.Address.ToString() + ":" + iPEndPoint.Port.ToString();
 			CommPort = new TcpClientPort(iPEndPoint.ToString());
-			Type type = Type.GetType("NetAPI.Communication.TcpClient", throwOnError: true);
-			iComm = (ICommunication)Activator.CreateInstance(type, socket);
-			iComm.readerName = ReaderName;
+            //Type type = Type.GetType("NetAPI.Communication.TcpClient", throwOnError: true);
+            //iComm = (ICommunication)Activator.CreateInstance(type, socket);
+            iComm = new Communication.TcpClient();
+            iComm.readerName = ReaderName;
 		}
 
 		protected bool Connect(out ErrInfo err)
@@ -116,10 +119,15 @@ namespace NetAPI.Core
 					string text = CommPort.Port.ToString();
 					if (text == "RS232" || text == "RS485")
 					{
-						text = "COM";
-					}
-					Type type = Type.GetType("NetAPI.Communication." + text, throwOnError: true);
-					iComm = (ICommunication)Activator.CreateInstance(type);
+                        //text = "COM";
+                        iComm = new COM();
+                    }
+                    else
+                    {
+                        iComm = new NetAPI.Communication.TcpClient();
+                    }
+					//Type type = Type.GetType("NetAPI.Communication." + text, throwOnError: true);
+					//iComm = (ICommunication)Activator.CreateInstance(type);
 					iComm.readerName = ReaderName;
 				}
 				catch (Exception ex)
@@ -131,10 +139,11 @@ namespace NetAPI.Core
 			}
 			if (iComm != null)
 			{
-				Assembly assembly = Assembly.LoadFrom(APIPath.folderName + "\\API.dll");
-				Type type2 = assembly.GetType("NetAPI.Protocol.VRP.Decode", throwOnError: true);
-				iComm.iProcess = (IProcess)Activator.CreateInstance(type2);
-				try
+                //Assembly assembly = Assembly.LoadFrom(APIPath.folderName + "\\API.dll");
+                //Type type2 = assembly.GetType("NetAPI.Protocol.VRP.Decode", throwOnError: true);
+                //iComm.iProcess = (IProcess)Activator.CreateInstance(type2);
+                iComm.iProcess = new Decode();
+                try
 				{
 					if (iComm.Open(CommPort.ConnStr))
 					{
