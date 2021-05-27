@@ -45,6 +45,11 @@ namespace AutoFacTest
             circle.Area(10);
         }
 
+        static void IocLifeInstancePerOwner()
+        {
+
+        }
+
         static void IocLifeInstancePerDependency()
         {
             
