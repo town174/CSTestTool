@@ -47,7 +47,7 @@ namespace AutoFacTest
 
         static void IocLifeInstancePerOwner()
         {
-
+            //mdf masters
         }
 
         static void IocLifeInstancePerDependency()
