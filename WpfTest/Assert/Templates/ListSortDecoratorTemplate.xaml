@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfTest.Assert.Templates">
+    <Style x:Key="ListSortDecoratorTemplate" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="HeaderedContentControl">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{TemplateBinding Header}"></TextBlock>
+                        <ContentPresenter Content="{TemplateBinding Content}" Margin="20,0"></ContentPresenter>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>    
+</ResourceDictionary>

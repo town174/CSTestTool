@@ -261,6 +261,7 @@
     <Compile Include="NetAPI.Protocol.VRP\Readers.cs" />
     <Compile Include="NetAPI.Protocol.VRP\RS485Item.cs" />
     <Compile Include="NetAPI.Protocol.VRP\UdpSearchIpHandle.cs" />
+    <Compile Include="NetApi.VRP.Test\ScmSimulate.cs" />
     <Compile Include="NetAPI\APIPath.cs" />
     <Compile Include="NetAPI\BaudRate.cs" />
     <Compile Include="NetAPI\DeviceCfg.cs" />

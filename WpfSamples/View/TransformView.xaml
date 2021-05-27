@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="WpfSamples.View.TransformView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfSamples.View"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Transform}"
+        mc:Ignorable="d">
+    <Grid>
+        <StackPanel>
+            <Button Content="msdn" VerticalContentAlignment="Center" Click="Button_Click"></Button>
+            <Grid MinHeight="400" MinWidth="600" ShowGridLines="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Canvas Grid.Row="0" Grid.Column="0">
+                    <TextBlock Canvas.Left="50" Canvas.Top="10" Text="RotateTransform 旋转" FontSize="20"/>
+                    <Rectangle Canvas.Left="100" Canvas.Top="50" Width="100" Height="100" Fill="RoyalBlue" Opacity="0.8">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="45"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </Canvas>
+                <Canvas Grid.Row="0" Grid.Column="1">
+                    <TextBlock Canvas.Left="50" Canvas.Top="10" Text="ScaleTransform 缩放" FontSize="20"/>
+                    <Rectangle Canvas.Left="100" Canvas.Top="50" Width="100" Height="100" Fill="RoyalBlue" Opacity="0.8">
+                        <Rectangle.RenderTransform>
+                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </Canvas>
+                <Canvas Grid.Row="1" Grid.Column="0">
+                    <TextBlock Canvas.Left="50" Canvas.Top="10" Text="SkewTransform 倾斜" FontSize="20"/>
+                    <Rectangle Canvas.Left="100" Canvas.Top="50" Width="100" Height="100" Fill="RoyalBlue" Opacity="0.8">
+                        <Rectangle.RenderTransform>
+                            <SkewTransform AngleX="20" AngleY="20"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </Canvas>
+                <Canvas Grid.Row="1" Grid.Column="1">
+                    <TextBlock Canvas.Left="50" Canvas.Top="10" Text="TranslateTransform 转化移动" FontSize="20"/>
+                    <Rectangle Canvas.Left="100" Canvas.Top="50" Width="100" Height="100" Fill="RoyalBlue" Opacity="0.8">
+                        <Rectangle.RenderTransform>
+                            <TranslateTransform X="50" Y="50"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </Canvas>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

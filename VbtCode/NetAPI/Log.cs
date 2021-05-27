@@ -14,7 +14,7 @@ namespace NetAPI
 
 		static Log()
 		{
-			LogLevel = "INFO";
+			LogLevel = "DEBUG";
 			folderName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Substring(6);
 			if (File.Exists(folderName + "\\DeviceCfg.xml"))
 			{

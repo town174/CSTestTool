@@ -12,21 +12,24 @@ namespace NetAPI.Core
 	{
 		public string ReaderName = "Device1";
 
-		protected ICommunication iComm;
+		protected ICommunication iComm = null;
 
 		private bool isExistReaderConfig = true;
 
+        bool _IsConn = false;
 		public bool IsConnected
 		{
-			get
-			{
-				bool result = false;
-				if (iComm != null)
-				{
-					result = iComm.isConnected;
-				}
-				return result;
-			}
+            //get
+            //{
+            //	bool result = false;
+            //	if (iComm != null)
+            //	{
+            //		result = iComm.isConnected;
+            //	}
+            //	return result;
+            //}
+            set { _IsConn = value; }
+            get { return _IsConn; }
 		}
 
 		public IPort CommPort
@@ -147,6 +150,7 @@ namespace NetAPI.Core
 				{
 					if (iComm.Open(CommPort.ConnStr))
 					{
+                        _IsConn = true;
 						iComm.OnMsgReceived += iConn_OnMsgReceived;
 						iComm.OnBuffReceived += iConn_OnBuffReceived;
 						iComm.threadProcess = new Thread(iComm.process);
@@ -158,7 +162,7 @@ namespace NetAPI.Core
 							{
 								IHostMessage connectMessage = ConnectMessage;
 								bool flag2 = Send(connectMessage);
-								if (connectMessage.Status != MsgStatus.Timeout)
+								//if (connectMessage.Status != MsgStatus.Timeout)
 								{
 									flag = true;
 									break;

@@ -84,7 +84,7 @@
                     <Border BorderBrush="GreenYellow" BorderThickness="2" Margin="5">
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="ListView绑定datatable" Margin="5"></TextBlock>
-                            <ListView Name="lsView3">
+                            <ListView Name="lsView3" HorizontalAlignment="Center" VerticalAlignment="Center" GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="编号" Width="80" DisplayMemberBinding="{Binding Age}"/>
@@ -181,6 +181,23 @@
                     <HeaderedContentControl Header="header2" Style="{StaticResource HcTemplate}">
                         <CheckBox IsChecked="True">ckb1</CheckBox>
                     </HeaderedContentControl>
+                    <!--<ListView x:Name='lv' Height="150" HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Year}"
+                              Header="Year"
+                              Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Month}"
+                              Header="Month"
+                              Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Day}"
+                              Header="Day"
+                              Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>-->
                 </StackPanel>
             </TabItem>
         </TabControl>

@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\UIElementAdorner.cs" />
     <Compile Include="Convert\MutilConvert.cs" />
     <Compile Include="Validator\RangeValidator.cs" />
     <Page Include="Assert\Data\UsefulRes.xaml">
@@ -84,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assert\Templates\HeaderContentTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assert\Templates\ListSortDecoratorTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

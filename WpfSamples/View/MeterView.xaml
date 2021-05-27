@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="WpfSamples.View.MeterView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctl="clr-namespace:WpfSamples.UiCore.Controls"     
+        xmlns:local="clr-namespace:WpfSamples.View"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Meter}"    
+        mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/UiCore/Styles/Clock/Clock.xaml"/>
+    </UserControl.Resources>
+    <Grid>
+        <TabControl>
+            <TabItem Header="mt1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Canvas Name="gaugeCanvas" Margin="20,20" MouseDown="Canvas_MouseDown">
+                            <Path Stroke="Yellow" StrokeThickness="30" Width="420" Height="400" StrokeStartLineCap="Round">
+                                <Path.Data>
+                                    <PathGeometry Figures="M 0,200 A 200,200 0 0 1 58.57864,58.57864"/>
+                                </Path.Data>
+                            </Path>
+                            <Path Stroke="Green" StrokeThickness="30" Width="420" Height="400">
+                                <Path.Data>
+                                    <PathGeometry Figures="M 58.57864,58.57864 A 200,200 0 0 1 341.42136,58.57864" />
+                                </Path.Data>
+                            </Path>
+                            <Path Stroke="Red" StrokeThickness="30" Width="420" Height="400" StrokeEndLineCap="Round">
+                                <Path.Data>
+                                    <PathGeometry Figures="M 341.42136,58.57864 A 200,200 0 0 1 400,200" />
+                                </Path.Data>
+                            </Path>
+                            <Path x:Name="indicatorPin" Fill="Orange">
+                                <Path.Data>
+                                    <PathGeometry>
+                                        <PathGeometry.Figures>
+                                            <PathFigure StartPoint="200,195" IsClosed="True">
+                                                <PathFigure.Segments>
+                                                    <LineSegment Point="20,200"/>
+                                                    <LineSegment Point="200,205"/>
+                                                </PathFigure.Segments>
+                                            </PathFigure>
+                                        </PathGeometry.Figures>
+                                    </PathGeometry>
+                                </Path.Data>
+                            </Path>
+                            <TextBlock x:Name="currentValueTxtBlock" Text="我是刻度盘" FontSize="20" Canvas.Left="140" Canvas.Top="150"/>
+                        </Canvas>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.RowSpan="2" Width="300" Height="300" Background="LightPink">
+                        <!--<Image Source="images/backGround.png"></Image>-->
+
+                        <!--<Label Name="lab商标" Foreground="White" Margin="0,0,0,211" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="Auto" Width="Auto" FontSize="13" >JackMoon</Label>-->
+                        <Label Name="labTime" Content="08:08:08" FontSize="16" Foreground="White" Height="Auto" HorizontalAlignment="Center" Margin="114,0,113,86"  VerticalAlignment="Bottom" Width="Auto" />
+                        <Label Name="lab创建时间" Foreground="White" Margin="0,91,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="Auto">1987</Label>
+                        <Label Name="Pointer12" Foreground="White" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="Auto" FontSize="20">12</Label>
+                        <Label Name="Pointer9" Foreground="White" Margin="0,0,0,20" HorizontalAlignment="Left" VerticalAlignment="Center" Height="Auto" Width="Auto" FontSize="20">9</Label>
+                        <Label Name="Pointer3" Foreground="White" Margin="0,0,0,20" HorizontalAlignment="Right" VerticalAlignment="Center" Height="Auto" Width="Auto" FontSize="20">3</Label>
+                        <Label Name="Pointer6" Foreground="White" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="Auto" Width="Auto" FontSize="20">6</Label>
+
+                        <!-- 秒针定义  -->
+                        <Rectangle Margin="150,0,149,150" Name="rectangleSecond" Stroke="White" Height="120" VerticalAlignment="Bottom" Width="1">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform x:Name="secondPointer" CenterX="0" CenterY="120" Angle="0" />
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <!-- -->
+
+                        <!-- 分钟定义  -->
+                        <Rectangle Margin="150,49,149,151" Name="rectangleMinute" Stroke="LightGreen" Width="1">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform x:Name="minutePointer" CenterX="0" CenterY="100" Angle="45" />
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <!-- -->
+
+                        <!-- 时针定义  -->
+                        <Rectangle Margin="150,80,149,150" Name="rectangleHour" Stroke="LightYellow" Width="1">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform x:Name="hourPointer" CenterX="0" CenterY="70" Angle="90" />
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                    </Grid>
+                    <TextBlock Margin="0,50" Grid.Column="0" Grid.Row="1" Text="https://github.com/zhidanfeng/WPF.UI， 上述链接仪表控件呈现较好，请参考"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="mt2">
+                <Grid>
+                    <ctl:CstClock x:Name="clock" Style="{StaticResource clockSty}" Padding="0" Background="AntiqueWhite">
+
+                    </ctl:CstClock>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

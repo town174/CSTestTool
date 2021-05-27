@@ -11,6 +11,7 @@ using WpfTest.Entity;
 using System.Collections.Specialized;
 using WpfTest.Validater;
 using WpfTest.Convert;
+using System.ComponentModel;
 
 namespace WpfTest
 {
@@ -87,7 +88,8 @@ namespace WpfTest
             //绑定observableCollection
             tecs2 = new ObservableCollection<Teacher>() {
                 new Teacher(){ Name = "abby", Age = "20", Class="5"},
-                new Teacher(){ Name = "john", Age = "35", Class="10"}
+                new Teacher(){ Name = "john", Age = "35", Class="10"},
+                new Teacher(){ Name = "lucy", Age = "40", Class="8"}
             };
             tecs2.CollectionChanged += Tecs2_CollectionChanged;
             //lsView2.DataContext = tecs2;
@@ -110,6 +112,7 @@ namespace WpfTest
             }
             lsView3.DataContext = dt;
             lsView3.SetBinding(ListView.ItemsSourceProperty, new Binding());
+            lsView3.Items.SortDescriptions.Add(new SortDescription("Class", ListSortDirection.Ascending));
 
             //绑定XmlDataProvider, xml作为数据传输保存格式应用太少了
             XmlDataProvider xdp = new XmlDataProvider();
@@ -316,6 +319,73 @@ namespace WpfTest
             ResourceDictionary resdic = new ResourceDictionary();
             resdic.Source = new Uri(ens, UriKind.Relative);
             appResource.Add(resdic);
+        }
+
+        GridViewColumnHeader _lastHeaderClicked = null;
+        ListSortDirection _lastDirection = ListSortDirection.Ascending;
+
+        private void GridViewColumnHeaderClickedHandler(object sender,RoutedEventArgs e)
+        {
+            var headerClicked = e.OriginalSource as GridViewColumnHeader;
+            ListSortDirection direction;
+
+            if (headerClicked != null)
+            {
+                if (headerClicked.Role != GridViewColumnHeaderRole.Padding)
+                {
+                    if (headerClicked != _lastHeaderClicked)
+                    {
+                        direction = ListSortDirection.Ascending;
+                    }
+                    else
+                    {
+                        if (_lastDirection == ListSortDirection.Ascending)
+                        {
+                            direction = ListSortDirection.Descending;
+                        }
+                        else
+                        {
+                            direction = ListSortDirection.Ascending;
+                        }
+                    }
+
+                    var columnBinding = headerClicked.Column.DisplayMemberBinding as Binding;
+                    var sortBy = columnBinding?.Path.Path ?? headerClicked.Column.Header as string;
+
+                    Sort(sortBy, direction);
+
+                    if (direction == ListSortDirection.Ascending)
+                    {
+                        headerClicked.Column.HeaderTemplate =
+                          Resources["HeaderTemplateArrowUp"] as DataTemplate;
+                    }
+                    else
+                    {
+                        headerClicked.Column.HeaderTemplate =
+                          Resources["HeaderTemplateArrowDown"] as DataTemplate;
+                    }
+
+                    // Remove arrow from previously sorted header
+                    if (_lastHeaderClicked != null && _lastHeaderClicked != headerClicked)
+                    {
+                        _lastHeaderClicked.Column.HeaderTemplate = null;
+                    }
+
+                    _lastHeaderClicked = headerClicked;
+                    _lastDirection = direction;
+                }
+            }
+        }
+
+        private void Sort(string sortBy, ListSortDirection direction)
+        {
+            ICollectionView dataView =
+              CollectionViewSource.GetDefaultView(lsView3.ItemsSource);
+
+            dataView.SortDescriptions.Clear();
+            SortDescription sd = new SortDescription(sortBy, direction);
+            dataView.SortDescriptions.Add(sd);
+            dataView.Refresh();
         }
     }
 
