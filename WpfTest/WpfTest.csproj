@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FullKeyboard.xaml.cs">
+      <DependentUpon>FullKeyboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UIElementAdorner.cs" />
     <Compile Include="Convert\MutilConvert.cs" />
     <Compile Include="Validator\RangeValidator.cs" />
@@ -99,6 +102,10 @@
     <Page Include="Controls\CarCtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FullKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
