@@ -23,8 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTest", "WpfTest\WpfTest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialStyles", "MaterialTest\MaterialStyles.csproj", "{DABB4849-493D-46BA-9D89-ECAB81940D77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfStyles", "WpfStyles\WpfStyles.csproj", "{8F677925-3E61-4560-A3E4-35636D45DBDD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncTest", "AsyncTest\AsyncTest.csproj", "{0C9BB4C3-6116-4F4F-902F-7AE30944EC47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionTest", "ExceptionTest\ExceptionTest.csproj", "{55EB5426-DF95-4F8C-9B30-4A13DD3AFBB2}"
@@ -35,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfSamples", "WpfSamples\Wp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoFacTest", "AutoFacTest\AutoFacTest.csproj", "{8240C4A2-D758-44C4-BCBF-F16C7EDF6908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPPlusTest", "EPPlusTest\EPPlusTest.csproj", "{E5600F4E-60A8-4224-8215-9AB462FE72B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPPlusTest", "EPPlusTest\EPPlusTest.csproj", "{E5600F4E-60A8-4224-8215-9AB462FE72B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +81,6 @@ Global
 		{DABB4849-493D-46BA-9D89-ECAB81940D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DABB4849-493D-46BA-9D89-ECAB81940D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DABB4849-493D-46BA-9D89-ECAB81940D77}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F677925-3E61-4560-A3E4-35636D45DBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F677925-3E61-4560-A3E4-35636D45DBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F677925-3E61-4560-A3E4-35636D45DBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F677925-3E61-4560-A3E4-35636D45DBDD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0C9BB4C3-6116-4F4F-902F-7AE30944EC47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0C9BB4C3-6116-4F4F-902F-7AE30944EC47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C9BB4C3-6116-4F4F-902F-7AE30944EC47}.Release|Any CPU.ActiveCfg = Release|Any CPU

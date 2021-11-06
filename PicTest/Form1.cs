@@ -198,7 +198,8 @@ namespace PicTest
                 lvPoints.Columns.Add(ch);
             }
             //从数据库加载数据
-            var data = DapperUtils.Query<BookShelfLocation>("SELECT * from bookshelflocations").OrderBy(x => x.BookShelfName);
+            var data = new List<BookShelfLocation>();
+            //var data = DapperUtils.Query<BookShelfLocation>("SELECT * from bookshelflocations").OrderBy(x => x.BookShelfName);
             //添加lv内容
             this.lvPoints.BeginUpdate();
             foreach (var item in data)
@@ -247,6 +248,7 @@ namespace PicTest
         }
 
         string[] gifBases = new string[] { };
+        List<Image> imagelist = new List<Image>();
         private void btnDirGif_Click(object sender, EventArgs e)
         {
             gifBases = new string[] { };
@@ -262,6 +264,12 @@ namespace PicTest
                 MessageBox.Show("文件不存在");
                 return;
             }
+            for (int i = 0; i < gifBases.Length; i++)
+            {
+                imagelist.Add(Image.FromFile(gifBases[i]));
+            }
+            TbGifHeight.Text = imagelist.Max(x => x.Height).ToString();
+            TbGifWidth.Text = imagelist.Max(x => x.Width).ToString();
         }
 
         private void btnGetGif_Click(object sender, EventArgs e)
@@ -273,18 +281,20 @@ namespace PicTest
             }
 
             string gifFile = "location.gif";
+
             AnimatedGifEncoder gifEncoder = new AnimatedGifEncoder();
-            gifEncoder.Start(gifFile);
-            gifEncoder.SetDelay(500);
-            gifEncoder.SetRepeat(999);
-            gifEncoder.SetSize(40,40);
+            gifEncoder.Start(Path.Combine(tbGif.Text, gifFile));
+            gifEncoder.SetDelay(int.Parse(TbGifDelay.Text));
+            gifEncoder.SetRepeat(int.Parse(TbGifRepeat.Text));
+            gifEncoder.SetSize(int.Parse(TbGifWidth.Text), int.Parse(TbGifHeight.Text));
             gifEncoder.SetTransparent(Color.Transparent);
-            for (int i = 0; i < gifBases.Length; i++)
+            for (int i = 0; i < imagelist.Count; i++)
             {
-                gifEncoder.AddFrame(Image.FromFile(gifBases[i]));
+                gifEncoder.AddFrame(imagelist[i]);
             }
             gifEncoder.Finish();
-            pbGif.Image = Image.FromFile(gifFile);
+
+            pbGif.Image = Image.FromFile(Path.Combine(tbGif.Text, gifFile));
         }
 
         private void btnExport_Click(object sender, EventArgs e)
