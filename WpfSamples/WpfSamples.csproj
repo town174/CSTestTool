@@ -125,6 +125,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MeterViewModel.cs" />
     <Compile Include="ViewModel\MvvmLightViewModel.cs" />
+    <Compile Include="ViewModel\NavViewModel .cs" />
     <Compile Include="ViewModel\TransformViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\AutofacViewModel .cs" />
@@ -147,6 +148,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\NavView.xaml.cs">
+      <DependentUpon>NavView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NavPage3.xaml.cs">
+      <DependentUpon>NavPage3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Nav\NavPage2.xaml.cs">
+      <DependentUpon>NavPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Nav\NavPage1.xaml.cs">
+      <DependentUpon>NavPage1.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MaterialDesignView.xaml.cs">
       <DependentUpon>MaterialDesignView.xaml</DependentUpon>
@@ -217,10 +230,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MaterialDesignView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

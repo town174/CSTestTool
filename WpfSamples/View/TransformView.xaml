@@ -6,7 +6,32 @@
         xmlns:local="clr-namespace:WpfSamples.View"
         DataContext="{Binding Source={StaticResource Locator}, Path=Transform}"
         mc:Ignorable="d">
-    <Grid>
+
+    <UserControl.Resources>
+        <Color x:Key="WhiteColor">#FFFFFFFF</Color>
+        <Color x:Key="NormalColor">#ffff00</Color>
+        <LinearGradientBrush x:Key="LGBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource NormalColor}" Offset="0"/>
+            <GradientStop Color="{StaticResource WhiteColor}" Offset="0.5"/>
+            <GradientStop Color="{StaticResource NormalColor}" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+
+    <Grid MinHeight="400" MinWidth="600">
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="border" 
+					Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Offset)"
+					BeginTime="00:00:00" Duration="00:00:5" From="0" To="1" AutoReverse="True" RepeatBehavior="Forever"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+        <Border x:Name="border" Background="{StaticResource LGBrush}" CornerRadius="2" />
+    </Grid>
+    <!--<Grid>
         <StackPanel>
             <Button Content="msdn" VerticalContentAlignment="Center" Click="Button_Click"></Button>
             <Grid MinHeight="400" MinWidth="600" ShowGridLines="True">
@@ -52,5 +77,5 @@
                 </Canvas>
             </Grid>
         </StackPanel>
-    </Grid>
+    </Grid>-->
 </UserControl>
