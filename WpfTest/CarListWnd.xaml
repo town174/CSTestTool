@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="CarListWnd" Height="450" Width="800">
     <Grid>
-        <ctl:CarCtl x:Name="carCtl"></ctl:CarCtl>
+        <ctl:CarCtl x:Name="CarCtl"></ctl:CarCtl>
     </Grid>
 </Window>

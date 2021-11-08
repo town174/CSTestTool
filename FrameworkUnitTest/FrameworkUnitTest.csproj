@@ -72,6 +72,7 @@
     <Compile Include="EncryptionTest.cs" />
     <Compile Include="NewtonJsonTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RSClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

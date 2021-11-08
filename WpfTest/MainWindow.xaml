@@ -24,9 +24,9 @@
         <TabControl Name="TcBase">
             <TabItem Header="依赖属性">
                 <StackPanel>
-                    <TextBox Name="tbdp1"></TextBox>
-                    <TextBox Name="tbdp2"></TextBox>
-                    <Button  Name="btDp" Click="btDp_Click">设置属性</Button>
+                    <TextBox Name="Tbdp1"></TextBox>
+                    <TextBox Name="Tbdp2"></TextBox>
+                    <Button  Name="BtDp" Click="btDp_Click">设置属性</Button>
                 </StackPanel>
             </TabItem>
             <TabItem Header="路由事件">
@@ -41,16 +41,16 @@
                     <Border BorderBrush="Red" BorderThickness="2" Margin="5">
                         <StackPanel Orientation="Horizontal">
                             <Label VerticalAlignment="Center">UI绑定INotify对象</Label>
-                            <TextBox Name="tb1" Width="200" Height="30" Margin="10"></TextBox>
-                            <TextBox Name="tb2" Width="200" Height="30"></TextBox>
+                            <TextBox Name="Tb1" Width="200" Height="30" Margin="10"></TextBox>
+                            <TextBox Name="Tb2" Width="200" Height="30"></TextBox>
                         </StackPanel>
                     </Border>
                     <Border BorderBrush="Orange" BorderThickness="2" Margin="5">
                         <StackPanel Orientation="Horizontal">
                             <Label VerticalAlignment="Center">UI绑定UI</Label>
-                            <TextBox Name="tb3" Width="200" Height="30" Margin="10"
-                                     Text="{Binding Path=Value, ElementName=sld1}"></TextBox>
-                            <Slider Name="sld1" Value="50" VerticalAlignment="Center" Maximum="100" Width="200"></Slider>
+                            <TextBox Name="Tb3" Width="200" Height="30" Margin="10"
+                                     Text="{Binding Path=Value, ElementName=Sld1}"></TextBox>
+                            <Slider Name="Sld1" Value="50" VerticalAlignment="Center" Maximum="100" Width="200"></Slider>
                         </StackPanel>
                     </Border>
                     <Border BorderBrush="Green" BorderThickness="2" Margin="5">
@@ -59,32 +59,32 @@
                                 <et:Teacher Name="town" Age="20" Class="cls5"></et:Teacher>
                             </StackPanel.DataContext>
                             <Label VerticalAlignment="Center">UI绑定DataContext</Label>
-                            <TextBox Name="tb4" Width="200" Height="30" Margin="10" Text="{Binding Path=Name}"></TextBox>
-                            <TextBox Name="tb5" Width="200" Height="30" Margin="10" Text="{Binding Path=Age}"></TextBox>
-                            <TextBox Name="tb6" Width="200" Height="30" Margin="10" Text="{Binding Path=Class}"></TextBox>
+                            <TextBox Name="Tb4" Width="200" Height="30" Margin="10" Text="{Binding Path=Name}"></TextBox>
+                            <TextBox Name="Tb5" Width="200" Height="30" Margin="10" Text="{Binding Path=Age}"></TextBox>
+                            <TextBox Name="Tb6" Width="200" Height="30" Margin="10" Text="{Binding Path=Class}"></TextBox>
                         </StackPanel>
                     </Border>
                     <Border BorderBrush="Purple" BorderThickness="2" Margin="5">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="itemControl绑定list,所选tec的学号：" Margin="5"></TextBlock>
-                            <TextBox Name="tbAge1" Width="100" Margin="5"></TextBox>
-                            <ListBox Name="lsView1" Width="100" Margin="5"></ListBox>
-                            <Button  Name="btnAddTec" Content="添加tec" Width="100" Margin="5" Click="btnAddTec_Click"></Button>
+                            <TextBox Name="TbAge1" Width="100" Margin="5"></TextBox>
+                            <ListBox Name="LsView1" Width="100" Margin="5"></ListBox>
+                            <Button  Name="BtnAddTec" Content="添加tec" Width="100" Margin="5" Click="btnAddTec_Click"></Button>
                         </StackPanel>
                     </Border>
                     <Border BorderBrush="Blue" BorderThickness="2" Margin="5">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="itemControl绑定observableCollection,所选学生的学号：" Margin="5"></TextBlock>
-                            <TextBox Name="tbAge2" Width="100" Margin="5"></TextBox>
-                            <ListBox Name="lsView2" Width="100" Margin="5"></ListBox>
-                            <Button  Name="btnAddTec2"  Content="添加tec" Width="100" Margin="5" Click="btnAddTec2_Click"></Button>
-                            <Button  Name="btnRemoveTec2"  Content="删除tec" Width="100" Margin="5" Click="btnRemoveTec2_Click"></Button>
+                            <TextBox Name="TbAge2" Width="100" Margin="5"></TextBox>
+                            <ListBox Name="LsView2" Width="100" Margin="5"></ListBox>
+                            <Button  Name="BtnAddTec2"  Content="添加tec" Width="100" Margin="5" Click="btnAddTec2_Click"></Button>
+                            <Button  Name="BtnRemoveTec2"  Content="删除tec" Width="100" Margin="5" Click="btnRemoveTec2_Click"></Button>
                         </StackPanel>
                     </Border>
                     <Border BorderBrush="GreenYellow" BorderThickness="2" Margin="5">
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="ListView绑定datatable" Margin="5"></TextBlock>
-                            <ListView Name="lsView3" HorizontalAlignment="Center" VerticalAlignment="Center" GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
+                            <ListView Name="LsView3" HorizontalAlignment="Center" VerticalAlignment="Center" GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="编号" Width="80" DisplayMemberBinding="{Binding Age}"/>
@@ -100,7 +100,7 @@
                             <TextBlock Text="treeView绑定xmldataprovider" Margin="5"></TextBlock>
                             <TreeViewItem>
                                 <TreeViewItem.Header>各个部门以及其成员</TreeViewItem.Header>
-                                <TreeView x:Name="tvDepartment">
+                                <TreeView x:Name="TvDepartment">
                                     <TreeView.ItemTemplate>
                                         <HierarchicalDataTemplate ItemsSource="{Binding XPath=Department}">
                                             <TextBlock Text="{Binding XPath=@Name}"></TextBlock>
@@ -111,24 +111,24 @@
                         </StackPanel>
                     </Border>
                     <Border BorderBrush="Pink" BorderThickness="2" Margin="5">
-                        <StackPanel Name="spRel" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel Name="SpRel" Orientation="Horizontal" HorizontalAlignment="Left">
                             <Label Content="ui绑定相对资源"></Label>
-                            <TextBlock Name="tbRelative" Width="100" Margin="5" TextAlignment="Center"></TextBlock>
+                            <TextBlock Name="TbRelative" Width="100" Margin="5" TextAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Border>
                     <Border BorderBrush="Red" BorderThickness="2" Margin="5">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <Label Content="校验器" Margin="5"></Label>
-                            <TextBox Name="tbValid" Width="100" TextAlignment="Center" Margin="5"></TextBox>
-                            <Slider Name="sldValid" Width="400" VerticalAlignment="Center" Margin="5" Maximum="200"></Slider>
+                            <TextBox Name="TbValid" Width="100" TextAlignment="Center" Margin="5"></TextBox>
+                            <Slider Name="SldValid" Width="400" VerticalAlignment="Center" Margin="5" Maximum="200"></Slider>
                         </StackPanel>
                     </Border>
                     <Border BorderBrush="Orange" BorderThickness="2" Margin="5">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
                             <Label Content="ui绑定多路资源" Margin="5"></Label>
-                            <TextBox Name="tbm1" Width="100" Margin="5"></TextBox>
-                            <TextBox Name="tbm2" Width="100" Margin="5"></TextBox>
-                            <Button  Name="btnMTest" Width="100" Margin="5" Click="btnMTest_Click">清空</Button>
+                            <TextBox Name="Tbm1" Width="100" Margin="5"></TextBox>
+                            <TextBox Name="Tbm2" Width="100" Margin="5"></TextBox>
+                            <Button  Name="BtnMTest" Width="100" Margin="5" Click="btnMTest_Click">清空</Button>
                         </StackPanel>
                     </Border>                    
                 </StackPanel>
@@ -137,7 +137,7 @@
                 <StackPanel>
                     <CheckBox Style="{StaticResource StyleCheckBox}">123</CheckBox>
                     <CheckBox>456</CheckBox>
-                    <TextBox Style="{StaticResource styleTextBox}" Width="100"></TextBox>
+                    <TextBox Style="{StaticResource StyleTextBox}" Width="100"></TextBox>
                 </StackPanel>
             </TabItem>
             <TabItem Header="模板">
@@ -149,28 +149,28 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="命令">
-                <StackPanel Name="spCmd">
-                    <Button Name="btnClear" Content="Clear" Margin="5,10"></Button>
-                    <TextBox Name="tbCmdConent" Margin="10,5" TextAlignment="Center"></TextBox>
+                <StackPanel Name="SpCmd">
+                    <Button Name="BtnClear" Content="Clear" Margin="5,10"></Button>
+                    <TextBox Name="TbCmdConent" Margin="10,5" TextAlignment="Center"></TextBox>
                     <!-- Command="ApplicationCommands.Copy"-->
-                    <Button Name="btnCopy" Content="Copy" Margin="5,10" Command="ApplicationCommands.Copy"></Button>
-                    <TextBox Name="tbCmd1" Margin="10,5" TextAlignment="Center"></TextBox>
-                    <TextBox Name="tbCmd2" Margin="10,5" TextAlignment="Center"></TextBox>
+                    <Button Name="BtnCopy" Content="Copy" Margin="5,10" Command="ApplicationCommands.Copy"></Button>
+                    <TextBox Name="TbCmd1" Margin="10,5" TextAlignment="Center"></TextBox>
+                    <TextBox Name="TbCmd2" Margin="10,5" TextAlignment="Center"></TextBox>
                 </StackPanel>
             </TabItem>
             <TabItem Header="资源">
                 <StackPanel>
-                    <TextBox  Name="tbStaRes" Margin="10,5" TextAlignment="Center" Text="{StaticResource staticRes}"></TextBox>
-                    <TextBox  Name="tbDynRes" Margin="10,5" TextAlignment="Center" Text="{DynamicResource dynamicRes}"></TextBox>
-                    <Button   Name="btnRes" Content="更换资源" Click="BtnRes_Click"></Button>
+                    <TextBox  Name="TbStaRes" Margin="10,5" TextAlignment="Center" Text="{StaticResource StaticRes}"></TextBox>
+                    <TextBox  Name="TbDynRes" Margin="10,5" TextAlignment="Center" Text="{DynamicResource DynamicRes}"></TextBox>
+                    <Button   Name="BtnRes" Content="更换资源" Click="BtnRes_Click"></Button>
                 </StackPanel>
             </TabItem>
             <TabItem Header="国际化">
                 <!--未生效-->
                 <StackPanel>
-                    <Button Name="btnLangCh" Click="btnLangCh_Click">中文</Button>
-                    <Button Name="btnLangEn" Click="btnLangEn_Click">英文</Button>
-                    <TextBlock TextAlignment="Center" Text="{DynamicResource welcome}"></TextBlock>
+                    <Button Name="BtnLangCh" Click="btnLangCh_Click">中文</Button>
+                    <Button Name="BtnLangEn" Click="btnLangEn_Click">英文</Button>
+                    <TextBlock TextAlignment="Center" Text="{DynamicResource Welcome}"></TextBlock>
                 </StackPanel>
             </TabItem>
             <TabItem Header="控件">

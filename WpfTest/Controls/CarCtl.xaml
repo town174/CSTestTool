@@ -9,13 +9,13 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <!--convert-->
-        <convert:Com2LogoConverter x:Key="c2Logo"></convert:Com2LogoConverter>
-        <convert:Car2Image x:Key="c2Img"></convert:Car2Image>
-        <DataTemplate x:Key="carDetailTemp">
+        <convert:Com2LogoConverter x:Key="C2Logo"></convert:Com2LogoConverter>
+        <convert:Car2Image x:Key="C2Img"></convert:Car2Image>
+        <DataTemplate x:Key="CarDetailTemp">
             <Border BorderBrush="Black" BorderThickness="1" CornerRadius="6">
                 <StackPanel>
                     <StackPanel Margin="5">
-                        <Image Width="400" Height="250" Source="{Binding Name,Converter={StaticResource c2Img}}"></Image>
+                        <Image Width="400" Height="250" Source="{Binding Name,Converter={StaticResource C2Img}}"></Image>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <TextBlock Text="Name:" FontWeight="Bold" FontSize="20"></TextBlock>
@@ -32,10 +32,10 @@
                 </StackPanel>
             </Border>
         </DataTemplate>
-        <DataTemplate x:Key="carListViewTemp">
+        <DataTemplate x:Key="CarListViewTemp">
             <Grid Margin="2">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="{Binding Automaker,Converter={StaticResource c2Logo}}"
+                    <Image Source="{Binding Automaker,Converter={StaticResource C2Logo}}"
                            Grid.RowSpan="3" Width="64" Height="64" Stretch="Uniform"></Image>
                     <StackPanel Margin="5,10">
                         <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold"></TextBlock>
@@ -47,10 +47,10 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal" Margin="5">
-            <UserControl ContentTemplate="{StaticResource carDetailTemp}"
-                         Content="{Binding SelectedItem,ElementName=listBoxCars}"></UserControl>
-            <ListBox Name="listBoxCars" Width="180" Margin="5"
-                     ItemTemplate="{StaticResource carListViewTemp}"></ListBox>
+            <UserControl ContentTemplate="{StaticResource CarDetailTemp}"
+                         Content="{Binding SelectedItem,ElementName=ListBoxCars}"></UserControl>
+            <ListBox Name="ListBoxCars" Width="180" Margin="5"
+                     ItemTemplate="{StaticResource CarListViewTemp}"></ListBox>
         </StackPanel>
     </Grid>
 </UserControl>

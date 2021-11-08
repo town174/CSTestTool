@@ -34,7 +34,7 @@ namespace XDM_Controller
         {
             InitializeComponent();
             FullKeyboardTitle.Text = inputTitle;
-            tbValue.Text = inputvalue;
+            TbValue.Text = inputvalue;
             valueString = inputvalue;
         }
 
@@ -44,18 +44,18 @@ namespace XDM_Controller
             Button clickedButton = (Button)e.OriginalSource;    //获取click事件触发源，即按了的按钮
             if ((String)clickedButton.Content=="DEL")
             {
-                if (tbValue.Text.Length>0)
+                if (TbValue.Text.Length>0)
                 {
-                    tbValue.Text = tbValue.Text.Substring(0, tbValue.Text.Length - 1);
+                    TbValue.Text = TbValue.Text.Substring(0, TbValue.Text.Length - 1);
                 }
             }
             else if ((String)clickedButton.Content == "AC")
             {
-                tbValue.Text = "";
+                TbValue.Text = "";
             }
             else if ((String)clickedButton.Content == "确认")
             {
-                valueString = tbValue.Text;
+                valueString = TbValue.Text;
                 this.Close();
             }
             else if ((String)clickedButton.Content == "A/a")
@@ -70,7 +70,7 @@ namespace XDM_Controller
             }
             else
             {
-                tbValue.Text += (String)clickedButton.Content;
+                TbValue.Text += (String)clickedButton.Content;
             }
         }
 

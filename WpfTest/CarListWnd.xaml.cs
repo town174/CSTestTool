@@ -34,7 +34,7 @@ namespace WpfTest
                 new Car() { Automaker = "Audi", Name = "Q5", Year = "2019", TopSpeed = "180" },
                 new Car() { Automaker = "Toyota", Name = "Camry", Year = "2018", TopSpeed = "160" }
             };
-            this.carCtl.listBoxCars.ItemsSource = carList;
+            this.CarCtl.ListBoxCars.ItemsSource = carList;
         }
     }
 }

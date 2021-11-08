@@ -32,9 +32,9 @@ namespace WpfTest
             this.StackPanelA.AddHandler(Button.ClickEvent, new RoutedEventHandler(ButtonClick));
             //依赖属性
             Student stu = new Student();
-            Binding binding = new Binding("Text") { Source = this.tbdp1 };
+            Binding binding = new Binding("Text") { Source = this.Tbdp1 };
             BindingOperations.SetBinding(stu, Student.NameProperty, binding);
-            this.tbdp2.SetBinding(TextBox.TextProperty, binding);
+            this.Tbdp2.SetBinding(TextBox.TextProperty, binding);
             //初始化数据绑定
             InitDataBinding();
             //初始化命令
@@ -73,17 +73,17 @@ namespace WpfTest
         {
             //绑定对象
             Teacher tec = new Teacher { Name = "echo" };
-            this.tb2.SetBinding(TextBox.TextProperty, new Binding("Name") { Source = tec });
+            this.Tb2.SetBinding(TextBox.TextProperty, new Binding("Name") { Source = tec });
 
             //绑定list
             tecs1 = new List<Teacher>() {
                 new Teacher(){ Name = "abby", Age = "20"},
                 new Teacher(){ Name = "john", Age = "35"}
             };
-            lsView1.ItemsSource = tecs1;
-            lsView1.DisplayMemberPath = "Name";
-            tbAge1.SetBinding(TextBox.TextProperty, 
-                new Binding("SelectedItem.Age") { Source = this.lsView1 });
+            LsView1.ItemsSource = tecs1;
+            LsView1.DisplayMemberPath = "Name";
+            TbAge1.SetBinding(TextBox.TextProperty, 
+                new Binding("SelectedItem.Age") { Source = this.LsView1 });
 
             //绑定observableCollection
             tecs2 = new ObservableCollection<Teacher>() {
@@ -93,10 +93,10 @@ namespace WpfTest
             };
             tecs2.CollectionChanged += Tecs2_CollectionChanged;
             //lsView2.DataContext = tecs2;
-            lsView2.ItemsSource = tecs2;            
-            lsView2.DisplayMemberPath = "Name";
-            tbAge2.SetBinding(TextBox.TextProperty,
-                new Binding("SelectedItem.Age") { Source = this.lsView2 });
+            LsView2.ItemsSource = tecs2;            
+            LsView2.DisplayMemberPath = "Name";
+            TbAge2.SetBinding(TextBox.TextProperty,
+                new Binding("SelectedItem.Age") { Source = this.LsView2 });
 
             //绑定DataTable
             dt.Columns.Add("Age", typeof(string));
@@ -110,22 +110,22 @@ namespace WpfTest
                 dr[2] = item.Class;
                 dt.Rows.Add(dr);
             }
-            lsView3.DataContext = dt;
-            lsView3.SetBinding(ListView.ItemsSourceProperty, new Binding());
-            lsView3.Items.SortDescriptions.Add(new SortDescription("Class", ListSortDirection.Ascending));
+            LsView3.DataContext = dt;
+            LsView3.SetBinding(ListView.ItemsSourceProperty, new Binding());
+            LsView3.Items.SortDescriptions.Add(new SortDescription("Class", ListSortDirection.Ascending));
 
             //绑定XmlDataProvider, xml作为数据传输保存格式应用太少了
             XmlDataProvider xdp = new XmlDataProvider();
             xdp.Source = new Uri("/Assert/Data/Depertment.xml",UriKind.Relative);
             xdp.XPath = @"/Department";
-            tvDepartment.DataContext = xdp;
-            tvDepartment.SetBinding(TreeView.ItemsSourceProperty, new Binding());
+            TvDepartment.DataContext = xdp;
+            TvDepartment.SetBinding(TreeView.ItemsSourceProperty, new Binding());
 
             //绑定相对资源
             RelativeSource rs = new RelativeSource();
             rs.AncestorLevel = 1;
             rs.AncestorType = typeof(StackPanel);
-            this.tbRelative.SetBinding(TextBlock.TextProperty, new Binding("Name") { RelativeSource = rs });
+            this.TbRelative.SetBinding(TextBlock.TextProperty, new Binding("Name") { RelativeSource = rs });
 
             #region 绑定校验器
             //绑定校验器
@@ -140,20 +140,20 @@ namespace WpfTest
             rvr.ValidatesOnTargetUpdated = true;
             bind.ValidationRules.Add(rvr);
             //绑定
-            this.tbValid.SetBinding(TextBox.TextProperty, bind);
+            this.TbValid.SetBinding(TextBox.TextProperty, bind);
             //设置校验失败处理事件
-            this.tbValid.AddHandler(Validation.ErrorEvent, new RoutedEventHandler((s, e) => {
-                if (Validation.GetErrors(this.tbValid).Count > 0)
+            this.TbValid.AddHandler(Validation.ErrorEvent, new RoutedEventHandler((s, e) => {
+                if (Validation.GetErrors(this.TbValid).Count > 0)
                 {
-                    this.tbValid.ToolTip = Validation.GetErrors(this.tbValid)[0].ErrorContent.ToString();
+                    this.TbValid.ToolTip = Validation.GetErrors(this.TbValid)[0].ErrorContent.ToString();
                     e.Handled = true;
                 }
             }));
             //设置源更新时，移除tooltips
-            this.tbValid.TargetUpdated += (s, e) => {
+            this.TbValid.TargetUpdated += (s, e) => {
                 (s as TextBox).ToolTip = "";
             };
-            this.tbValid.SourceUpdated += (s, e) => {
+            this.TbValid.SourceUpdated += (s, e) => {
                 (s as TextBox).ToolTip = "";
             };
             #endregion
@@ -165,7 +165,7 @@ namespace WpfTest
             mb.Converter = new MutilConvert();
             mb.Bindings.Add(bm1);
             mb.Bindings.Add(bm2);
-            this.btnMTest.SetBinding(Button.IsEnabledProperty, mb);
+            this.BtnMTest.SetBinding(Button.IsEnabledProperty, mb);
         }
 
         private void Tecs2_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -186,29 +186,29 @@ namespace WpfTest
             //声明定义命令
             RoutedCommand clearCmd = new RoutedCommand("Clear", typeof(MainWindow));
             //设置命令源,指定快捷键
-            this.btnClear.Command = clearCmd;
+            this.BtnClear.Command = clearCmd;
             clearCmd.InputGestures.Add(new KeyGesture(Key.C, ModifierKeys.Alt));
             //设置命令目标
-            this.btnClear.CommandTarget = this.tbCmdConent;
+            this.BtnClear.CommandTarget = this.TbCmdConent;
             //创建命令关联
             CommandBinding cb = new CommandBinding(clearCmd);
             cb.CanExecute += Cb_CanExecute;
             cb.Executed += Cb_Executed;
             //外围容器添加命令关联
-            this.spCmd.CommandBindings.Add(cb);
+            this.SpCmd.CommandBindings.Add(cb);
         }
 
         //命令执行内容
         private void Cb_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            this.tbCmdConent.Clear();
+            this.TbCmdConent.Clear();
             e.Handled = true;
         }
 
         //命令执行条件
         private void Cb_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(this.tbCmdConent.Text)) e.CanExecute = false;
+            if (string.IsNullOrEmpty(this.TbCmdConent.Text)) e.CanExecute = false;
             else e.CanExecute = true;
             e.Handled = true;
         }
@@ -240,13 +240,13 @@ namespace WpfTest
 
         private void Copy_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = !string.IsNullOrEmpty(this.tbCmd1.Text);
+            e.CanExecute = !string.IsNullOrEmpty(this.TbCmd1.Text);
             e.Handled = false;
         }
 
         private void Copy_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            this.tbCmd2.Text = this.tbCmd1.Text;
+            this.TbCmd2.Text = this.TbCmd1.Text;
         }
 
         private void btnAddTec_Click(object sender, RoutedEventArgs e)
@@ -267,8 +267,8 @@ namespace WpfTest
 
         private void btnMTest_Click(object sender, RoutedEventArgs e)
         {
-            this.tbm1.Text = "";
-            this.tbm2.Text = "";
+            this.Tbm1.Text = "";
+            this.Tbm2.Text = "";
         }
 
         private void BtnRes_Click(object sender, RoutedEventArgs e)
@@ -380,7 +380,7 @@ namespace WpfTest
         private void Sort(string sortBy, ListSortDirection direction)
         {
             ICollectionView dataView =
-              CollectionViewSource.GetDefaultView(lsView3.ItemsSource);
+              CollectionViewSource.GetDefaultView(LsView3.ItemsSource);
 
             dataView.SortDescriptions.Clear();
             SortDescription sd = new SortDescription(sortBy, direction);
