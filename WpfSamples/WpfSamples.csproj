@@ -149,20 +149,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\NavView.xaml.cs">
-      <DependentUpon>NavView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\NavPage3.xaml.cs">
-      <DependentUpon>NavPage3.xaml</DependentUpon>
+    <Compile Include="View\MaterialDesignView.xaml.cs">
+      <DependentUpon>MaterialDesignView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Nav\NavPage2.xaml.cs">
       <DependentUpon>NavPage2.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Nav\NavPage1.xaml.cs">
       <DependentUpon>NavPage1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MaterialDesignView.xaml.cs">
-      <DependentUpon>MaterialDesignView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TransformView.xaml.cs">
       <DependentUpon>TransformView.xaml</DependentUpon>
@@ -232,6 +226,26 @@
     <Page Include="View\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MaterialDesignView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NavPage3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NavView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Nav\NavPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Nav\NavPage2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\TransformView.xaml">
       <Generator>MSBuild:Compile</Generator>

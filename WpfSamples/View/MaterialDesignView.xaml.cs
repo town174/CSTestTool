@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace WpfSamples.View
 {
     /// <summary>
-    /// MaterialDesignView.xaml 的交互逻辑
+    /// FanView.xaml 的交互逻辑
     /// </summary>
     public partial class MaterialDesignView : UserControl
     {
